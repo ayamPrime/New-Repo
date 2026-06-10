@@ -1,0 +1,100 @@
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: "ABeeZee", "Old Standard TT", sans-serif;
+    background: white;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-space {
+    width: 720px;
+    background-color: #f2f2f2;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.formgroup {
+    /* width: 720px; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#heading {
+    margin: 20px 0;
+    padding: 0 15px;
+}
+
+#heading h1 {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    text-align: center;
+    font-size: 3em;
+}
+
+.form {
+    /* box-sizing: content-box; */
+    /* display: flex;
+    flex-wrap: wrap; */
+    padding: 0px 20px 0px 0px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+}
+
+.form .formelements {
+    margin: 0px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* flex-basis: 275px; */
+}
+
+.form .formelements label {
+    margin: 0px 0px 8px 8px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.form .formelements input[type="text"],
+.form .formelements input[type="email"],
+.form .formelements input[type="password"],
+.form .formelements input[type="date"],
+.form .formelements select {
+    margin: 0px 0px 0px 8px;
+    padding: 10px; 
+    border-radius: 20px;
+    border: 1px solid #ccc;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
+    padding: 0;
+}
+
+.buttons button {
+    /* background-color: #4CAF50; */
+    /* color: white; */
+    background-color: black;
+    opacity: 1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    opacity: 2;
+    letter-spacing: 2px;
+}

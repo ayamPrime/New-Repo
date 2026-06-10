@@ -1,0 +1,228 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:  "ABeeZee", "Old Standard TT", sans-serif;
+    box-sizing: border-box;
+    color: #cacaca;
+    /* background: url('background.jpg'); */
+    background-size: cover;
+    z-index: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/* HTML TAGS */
+#main_heading h1 {
+    color: black;
+    font-size: 120px;
+}
+
+header {
+    margin: 30px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    padding: 10px;
+}
+
+a:hover {
+    background-color: #000000;
+    border-radius: 20px;
+    padding: 8px;
+    color: white;
+    letter-spacing: 3.5px;
+}
+
+
+nav {
+    margin: 30px 30px 50px 30px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+nav li {
+    list-style-type: none;
+    word-spacing: 10px;
+    letter-spacing: 3px;
+}
+
+nav li:nth-child(2), li:nth-child(4) {
+    word-spacing: 1px;
+}
+
+.fa-whatsapp {
+    color: #4caf50;
+    font-size: 100px;
+}
+
+nav li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 18px;
+    padding: 10px;
+}
+
+nav li a:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+span {
+    color: red;
+}
+/* CLASSES and IDS */
+#main_heading {
+    margin: 30px;
+}
+
+.container {
+    background-color: white;
+    z-index: 3;
+    width: fit-content;
+    margin: auto;
+}
+
+.content {
+    /* max-width: 1100px; */
+    padding: 0px 40px;
+    margin: 20px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    /* flex-basis: 1100px; */
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+/* LOGIN PAGE FORM */
+
+#form_header {
+    max-height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#form_header h1 {
+    font-size: 50px;
+    margin: 0 10px;
+    padding: 0 10px;
+}
+
+#form_header h3 {
+    font-size: 30px;
+    margin: 15px;
+}
+
+/* #form_header img {
+    width: 0px;
+    height: 50px;
+} */
+
+.form-space {
+    background-color: white;
+    border-radius: 20px;
+    opacity: 0.7;
+    color: black;
+    width: fit-content;
+    margin: auto;
+}
+
+.form-group {
+    margin: 35px;
+    overflow: hidden;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+}
+
+.form label {
+    font-size: 28px;
+    text-transform: capitalize;
+    word-spacing: 0.1px;
+    letter-spacing: 1px;
+}
+
+.form input {
+    border-radius: 20px;
+    margin: 5px 0 30px 0;
+    height: 30px;
+    /* width: 100px; */
+}
+
+.form select {
+    border-radius: 20px;
+    margin: 5px 0 30px 0;
+    height: 30px;
+}
+
+/* GENERAL BUTTON STYLE */
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
+    padding: 0;
+}
+
+.buttons button {
+    /* background-color: #4CAF50; */
+    /* color: white; */
+    background-color: black;
+    opacity: 1;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.buttons button:hover {
+    opacity: 2;
+    letter-spacing: 2px;
+}
+
+/* SIGN UP OPTIONS */
+.form_options {
+    display: grid;
+    gap: 17px;
+    grid-template-columns: 50% 50%;
+}
+
+.form_options p {
+    font-size: 22px;
+}
+
+.form_options a {
+    margin: 0;
+    padding: 0;
+    text-decoration: underline;
+    color: rgba(165, 45, 165, 0.991);
+}
+
+.form_options a:hover {
+    color: white;
+    font-size: 22px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
