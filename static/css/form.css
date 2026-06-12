@@ -3,12 +3,16 @@ body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    font-family: "ABeeZee", "Old Standard TT", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background: white;
     overflow: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: url('https://unsplash.com/photos/old-white-house-with-green-shutters-and-rusty-roof-wVmjMZd-CDw');
+    background-size: cover;
+    z-index: 0;
+    height: 100vh;
 }
 
 .form-space {
@@ -19,7 +23,6 @@ body {
 }
 
 .formgroup {
-    /* width: 720px; */
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -39,9 +42,6 @@ body {
 }
 
 .form {
-    /* box-sizing: content-box; */
-    /* display: flex;
-    flex-wrap: wrap; */
     padding: 0px 20px 0px 0px;
     display: grid;
     grid-template-columns: 50% 50%;
@@ -54,7 +54,6 @@ body {
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: space-evenly;
-    /* flex-basis: 275px; */
 }
 
 .form .formelements label {
@@ -76,14 +75,12 @@ body {
 
 .buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     margin: 30px;
     padding: 0;
 }
 
 .buttons button {
-    /* background-color: #4CAF50; */
-    /* color: white; */
     background-color: black;
     opacity: 1;
     color: white;
