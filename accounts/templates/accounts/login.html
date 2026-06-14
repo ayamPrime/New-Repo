@@ -1,49 +1,33 @@
+{% extends 'accounts/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- <link rel="stylesheet" href="form.css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <title>EL-VANTA | LOGIN</title>
-</head>
-<body>
-    <div class="form-space">
-    <div class="form-group">
-        <!-- <img src="logo.jpeg" alt=""> -->
+
+{% block css %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+{% block title %}Log-In{% endblock %}
+{% block content%}
         <header id="form_header">
             <h1>ACCOMMODATIONS HUB</h1>
             <h3>Customer Login</h3>
         </header>
-        <form action="" class="form">
-            <label for="name">Username <span>*</span></label>
-            <input type="text" id="name" name="name" required>
-            <label for="password">Password <span>*</span></label>
-            <input type="password" id="password" name="password" required>
-        <div class="buttons">
-            <button type="submit">
-                Submit
-            </button>
-            <button type="reset">
-                Reset
-            </button>
-        </div>
-        <div class="form_options">
-            <p>Don't have an account? <a href="{% url 'signup' %}" target="_blank">Sign Up</a></p>
-            <p>Forgot Password? <br> <a href="#">Reset Password</a></p>
-        </div>
-        </div>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="form">
+                <label for="id_username">Username<span>*</span></label>
+                {{ form.username }}
+                {{ form.username.errors }}
+                <label for="id_password">Password<span>*</span></label>
+                {{ form.password }}
+                {{ form.password.errors }}
+            </div>
+            <div class="buttons">
+                <button type="submit">
+                    Submit
+                </button>
+            </div>
+            <div class="form_options">
+                <p>Don't have an account? <br> <a href="{% url 'signup' %}" target="_blank">Sign Up</a></p>
+                <p>Forgot Password? <br> <a href="#">Reset Password</a></p>
+            </div>
+            </div>
         </form>
-    </div>
-    </div>
-
-    <!-- <script src="testing.js"></script> -->
-</body>
-</html>
+{% endblock %}

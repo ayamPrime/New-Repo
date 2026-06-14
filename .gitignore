@@ -67,3 +67,8 @@ static_root/
 # Jupyter Notebooks (if used for analysis later)
 .ipynb_checkpoints/
 *.ipynb
+
+# Images
+*.jpg
+*.jpeg
+*.png
