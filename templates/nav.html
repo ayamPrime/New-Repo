@@ -16,6 +16,9 @@
                 <li><a href="{% url 'signup' %}">Sign Up</a></li>
                 <li><a href="{% url 'login' %}">Log In</a></li>
             {% endif %}
+            {% if user.account_type == 'agent' %}
+                <li><a href="#">Add Listing</a></li>
+            {% endif %}
         </ul>
         {% if user.is_authenticated %}
             <form action="{% url 'logout' %}" method="POST" class="nav-logout">
