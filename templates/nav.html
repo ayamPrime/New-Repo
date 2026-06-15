@@ -1,0 +1,26 @@
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-overlay"></div>
+
+    <nav class="nav-drawer" id="nav-drawer">
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'listings' %}">Listings</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+            {% else %}
+                <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                <li><a href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+            <form action="{% url 'logout' %}" method="POST" class="nav-logout">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% endif %}
+    </nav>

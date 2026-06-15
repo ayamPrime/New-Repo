@@ -1,126 +1,72 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EL-VANTA</title>
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/listings.css' %}">
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
 
-<header>
-    <nav class="navbar">
-        <div id="header">
-            <div class="logo">ACCOMMODATIONS HUB</div>
-        </div>
+{% block title %}Home{% endblock %}
 
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search listings.....">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-
-        <div class="linking">
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'signup' %}">SignUp</a></li>
-                <li><a href="{% url 'login' %}">LogIn</a></li>
-            </ul>
-        </div>
-
-        <div class="nav-icons">
-            <i class="fas fa-shopping-cart"></i>
-            <span id="cart-count">0</span>
-        </div>
-    </nav>
+{% block content %}
+<header class="top-bar">
+    <div id="header">Accommodations Hub</div>
+    <div class="search-box">
+        <input type="text" placeholder="Search listings...">
+        <button type="button" aria-label="Search"><i class="fas fa-search"></i></button>
+    </div>
 </header>
 
 <section class="hero">
     <div class="hero-content">
-        <h1>Listings</h1>
-        <p><i>...click to see available listings</i></p>
-       <button class="shop"><a href="shopnow.html">Browse</a></button>
+        <h1>Find your home near OOU</h1>
+        <p>Verified rooms and apartments, just minutes from campus.</p>
+        <a href="#" class="btn-browse">Browse Listings</a>
     </div>
 </section>
 
-<section class="products">
+<section class="recent-listings">
     <h2>Recent Listings</h2>
+    <div class="listings-grid">
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦120,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Self-contain</h3>
+                <p class="listing-location">Oru</p>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
 
-    <div class="product-grid" id="productGrid">
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦95,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Self-contain</h3>
+                <p class="listing-location">Maryann</p>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
 
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500" alt="">
-            <h3>Self-contain</h3>
-            <p>Oru</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦60,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">A room</h3>
+                <p class="listing-location">Ajegunle</p>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
 
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" alt="">
-            <h3>2 man room</h3>
-            <p>Chips</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="">
-            <h3>A room</h3>
-            <p>Maryann</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-        <div class="product-card">
-            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500" alt="">
-            <h3>Two Bedroom</h3>
-            <p>Ajegunle</p>
-            <button class="add-cart">Add Listings</button>
-        </div>
-
+        <!-- Same pattern for your remaining "Oru / Self-contain" cards -->
     </div>
 </section>
 
-<footer>
-    <p>© 2026 EL-VANTA. <i>All Rights Reserved.</i></p>
+<footer class="site-footer">
+    <p>© 2026 EL-VANTA. All Rights Reserved.</p>
 </footer>
-
-<!-- <script src="script.js"></script> -->
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %} <link rel="stylesheet" href="{% static 'css/profile.css' %}"> {% endblock %}
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+    <header id="form_header">
+        <h1>ACCOMMODATIONS HUB</h1>
+        <h3>My Profile</h3>
+    </header>
+
+    <div class="profile-card">
+        <div class="profile-info">
+            <div class="info-row">
+                <span class="label">First Name</span>
+                <span class="value">{{ user.first_name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Last Name</span>
+                <span class="value">{{ user.last_name }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Username</span>
+                <span class="value">{{ user.username }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Email</span>
+                <span class="value">{{ user.email }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Gender</span>
+                <span class="value">{{ user.get_gender_display }}</span>
+            </div>
+            <div class="info-row">
+                <span class="label">Account Type</span>
+                <span class="value badge badge-{{ user.account_type }}">{{ user.get_account_type_display }}</span>
+            </div>
+        </div>
+
+        {% if user.account_type == 'agent' %}
+        <div class="profile-listings">
+            <h3>My Listings</h3>
+            <p class="empty-state">You haven't posted any listings yet.</p>
+        </div>
+        {% endif %}
+
+        <div class="buttons">
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

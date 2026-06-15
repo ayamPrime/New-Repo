@@ -1,0 +1,289 @@
+/* =========================================================
+   El Vanta — Profile Page ("Resident Pass")
+   ---------------------------------------------------------
+   Concept: the profile card reads like a resident pass —
+   a perforated tear-line with two notches sits above the
+   action area, and account details sit inside an inset
+   "ledger" panel rendered in monospace, like a key-card
+   readout.
+
+   To retheme: change the values in :root below. Everything
+   else references these variables, so a new palette or
+   font swap is a few-line edit.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+    /* Core palette */
+    --color-bg: #EFEDE8;
+    --color-surface: #FFFFFF;
+    --color-ink: #1C1F1D;
+    --color-ink-soft: #5C6360;
+    --color-border: #E2DFD8;
+
+    /* Accents */
+    --color-danger: #B5482F;
+    --color-danger-hover: #9A3D27;
+
+    /* Account-type badge colours (optional — see .badge below) */
+    --color-agent: #8A5A1C;
+    --color-agent-soft: #F6E6CC;
+    --color-student: #2F5D55;
+    --color-student-soft: #E3ECE9;
+
+    /* Type */
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    /* Layout */
+    --radius-card: 20px;
+    --radius-panel: 14px;
+    --radius-pill: 999px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   Page shell
+   --------------------------------------------------------- */
+
+.profile-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-4) var(--space-3) var(--space-5);
+}
+
+#form_header {
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: var(--space-4);
+}
+
+#form_header h1 {
+    margin: 0 0 4px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
+#form_header h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   The pass itself
+   --------------------------------------------------------- */
+
+.profile-card {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow:
+        0 1px 2px rgba(28, 31, 29, 0.04),
+        0 8px 24px rgba(28, 31, 29, 0.06);
+}
+
+/* Inset "ledger" panel — your account record */
+.profile-info {
+    margin: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg);
+    border-radius: var(--radius-panel);
+    display: flex;
+    flex-direction: column;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row .label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+}
+
+.info-row .value {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-align: right;
+    min-width: 0;
+    overflow-wrap: break-word;
+}
+
+/* Optional: wrap a value in <span class="value badge"> for a pill.
+   Add badge-agent / badge-student (e.g. via Django:
+   "badge badge-{{ user.account_type }}") to colour by account type. */
+.badge {
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--color-border);
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+}
+
+.badge-agent {
+    background: var(--color-agent-soft);
+    color: var(--color-agent);
+}
+
+.badge-student {
+    background: var(--color-student-soft);
+    color: var(--color-student);
+}
+
+/* ---------------------------------------------------------
+   Agent-only listings section
+   --------------------------------------------------------- */
+
+.profile-listings {
+    padding: 0 var(--space-4) var(--space-4);
+}
+
+.profile-listings h3 {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.empty-state {
+    margin: 0;
+    padding: var(--space-3);
+    border: 1.5px dashed var(--color-border);
+    border-radius: 12px;
+    color: var(--color-ink-soft);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ---------------------------------------------------------
+   Action area — perforated tear-line + logout
+   --------------------------------------------------------- */
+
+.buttons {
+    position: relative;
+    padding: var(--space-4);
+    border-top: 2px dashed var(--color-border);
+}
+
+/* Notches that "bite" into the card edges, in sync with the
+   dashed line above — clipped by .profile-card's overflow:hidden */
+.buttons::before,
+.buttons::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: var(--color-bg);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.buttons::before {
+    left: -10px;
+}
+
+.buttons::after {
+    right: -10px;
+}
+
+.buttons form {
+    margin: 0;
+}
+
+.buttons button[type="submit"] {
+    width: 100%;
+    padding: var(--space-3);
+    border: none;
+    border-radius: 12px;
+    background: var(--color-danger);
+    color: #FFFFFF;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.buttons button[type="submit"]:hover {
+    background: var(--color-danger-hover);
+}
+
+.buttons button[type="submit"]:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+}
+
+/* ---------------------------------------------------------
+   Larger screens
+   --------------------------------------------------------- */
+
+@media (min-width: 640px) {
+    .profile-container {
+        padding-top: var(--space-5);
+    }
+
+    .profile-card {
+        max-width: 520px;
+    }
+
+    #form_header h3 {
+        font-size: 2.25rem;
+    }
+}
+
+/* ---------------------------------------------------------
+   Respect reduced-motion preferences
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

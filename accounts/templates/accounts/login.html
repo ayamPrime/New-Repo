@@ -1,33 +1,37 @@
-{% extends 'accounts/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block css %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
 {% block title %}Log-In{% endblock %}
 {% block content%}
-        <header id="form_header">
-            <h1>ACCOMMODATIONS HUB</h1>
-            <h3>Customer Login</h3>
-        </header>
-        <form action="" method = "POST">
-            {% csrf_token %}
-            {{ form.non_field_errors }}
-            <div class="form">
-                <label for="id_username">Username<span>*</span></label>
-                {{ form.username }}
-                {{ form.username.errors }}
-                <label for="id_password">Password<span>*</span></label>
-                {{ form.password }}
-                {{ form.password.errors }}
-            </div>
-            <div class="buttons">
-                <button type="submit">
-                    Submit
-                </button>
-            </div>
-            <div class="form_options">
-                <p>Don't have an account? <br> <a href="{% url 'signup' %}" target="_blank">Sign Up</a></p>
-                <p>Forgot Password? <br> <a href="#">Reset Password</a></p>
-            </div>
-            </div>
-        </form>
+    <div class="form-space">
+        <div class="formgroup">
+            <header id="form_header">
+                <h1>ACCOMMODATIONS HUB</h1>
+                <h3>Customer Login</h3>
+            </header>
+            <form action="" method = "POST">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form">
+                    <label for="id_username">Username<span>*</span></label>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                    <label for="id_password">Password<span>*</span></label>
+                    {{ form.password }}
+                    {{ form.password.errors }}
+                </div>
+                <div class="buttons">
+                    <button type="submit">
+                        Submit
+                    </button>
+                </div>
+                <div class="form_options">
+                    <p>Don't have an account? <br> <a href="{% url 'signup' %}">Sign Up</a></p>
+                    <p>Forgot Password? <br> <a href="#">Reset Password</a></p>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

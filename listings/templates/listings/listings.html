@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/listings.css' %}">
+{% endblock %}
+
+{% block title %}Browse Listings{% endblock %}
+
+{% block content %}
+
+
+<div class="listings-page">
+    <header class="listings-header">
+        <h1>Find a place near OOU</h1>
+        <p>Browse verified rooms and apartments around Ago-Iwoye.</p>
+    </header>
+
+    <div class="listings-grid">
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦120,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Self-Contain</h3>
+                <p class="listing-location">5 min walk to Main Gate</p>
+                <span class="listing-type">Self-Contain</span>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦65,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Single Room</h3>
+                <p class="listing-location">10 min from campus, along Sagamu Road</p>
+                <span class="listing-type">Single Room</span>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦150,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Studio Apartment</h3>
+                <p class="listing-location">Behind Faculty of Science</p>
+                <span class="listing-type">Studio</span>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦90,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Shared Apartment</h3>
+                <p class="listing-location">Opposite Faculty of Agriculture</p>
+                <span class="listing-type">Shared</span>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦110,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Self-Contain</h3>
+                <p class="listing-location">5 min walk to Back Gate</p>
+                <span class="listing-type">Self-Contain</span>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
+
+        <article class="listing-card">
+            <div class="listing-image">
+                <span class="listing-price">₦70,000/yr</span>
+            </div>
+            <div class="listing-body">
+                <h3 class="listing-title">Single Room</h3>
+                <p class="listing-location">Walking distance to lecture halls</p>
+                <span class="listing-type">Single Room</span>
+                <a href="#" class="listing-link">View Details</a>
+            </div>
+        </article>
+    </div>
+</div>
+{% endblock %}

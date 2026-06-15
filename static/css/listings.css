@@ -1,0 +1,196 @@
+/* =========================================================
+   El Vanta — Listings Page
+   ---------------------------------------------------------
+   A responsive grid of property cards. Each card has a
+   placeholder image area with a price tag overlaid in the
+   corner — swap the gradient for {{ listing.image.url }}
+   once the backend exists.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --color-bg: #EFEDE8;
+    --color-surface: #FFFFFF;
+    --color-ink: #1C1F1D;
+    --color-ink-soft: #5C6360;
+    --color-border: #E2DFD8;
+    --color-accent: #D99A3D;
+    --color-accent-soft: #F6E6CC;
+
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --radius-card: 16px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   Page shell
+   --------------------------------------------------------- */
+
+.listings-page {
+    min-height: 100vh;
+    padding: 72px var(--space-3) var(--space-5);
+    /* top padding clears the fixed hamburger button */
+}
+
+.listings-header {
+    max-width: 1100px;
+    margin: 0 auto var(--space-4);
+}
+
+.listings-header h1 {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.listings-header p {
+    margin: 0;
+    color: var(--color-ink-soft);
+}
+
+/* ---------------------------------------------------------
+   Card grid
+   --------------------------------------------------------- */
+
+.listings-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+    .listings-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 960px) {
+    .listings-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ---------------------------------------------------------
+   Individual listing card
+   --------------------------------------------------------- */
+
+.listing-card {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow:
+        0 1px 2px rgba(28, 31, 29, 0.04),
+        0 8px 24px rgba(28, 31, 29, 0.06);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 4px 8px rgba(28, 31, 29, 0.06),
+        0 12px 28px rgba(28, 31, 29, 0.08);
+}
+
+/* Placeholder image area — replace background with a real photo later */
+.listing-image {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(135deg, #DCE6E2, #C9D6D1);
+}
+
+.listing-price {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--color-ink);
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.listing-body {
+    padding: var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.listing-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.listing-location {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-ink-soft);
+}
+
+.listing-type {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--color-accent-soft);
+    color: #8A5A1C;
+    padding: 3px 10px;
+    border-radius: 999px;
+}
+
+.listing-link {
+    margin-top: var(--space-2);
+    align-self: flex-start;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 2px solid var(--color-accent);
+}
+
+.listing-link:hover {
+    color: var(--color-accent);
+}
+
+.listing-link:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .listing-card,
+    .listing-card:hover {
+        transition: none;
+        transform: none;
+    }
+}
