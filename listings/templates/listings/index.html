@@ -22,47 +22,35 @@
     <div class="hero-content">
         <h1>Find your home near OOU</h1>
         <p>Verified rooms and apartments, just minutes from campus.</p>
-        <a href="#" class="btn-browse">Browse Listings</a>
+        <a href="{% url 'create_listings'%}" class="btn-browse">Browse Listings</a>
     </div>
 </section>
 
 <section class="recent-listings">
     <h2>Recent Listings</h2>
-    <div class="listings-grid">
+   <div class="listings-grid">
+        {% for listing in listings %}
         <article class="listing-card">
             <div class="listing-image">
-                <span class="listing-price">₦120,000/yr</span>
+                {% if listing.images.first %}
+                    <img
+                        src="{{ listing.images.first.image.url }}"
+                        alt="{{ listing.listing_title }}"
+                        style="width:100%; height:100%; object-fit:cover; display:block;"
+                    >
+                {% endif %}
+                <span class="listing-price">₦{{ listing.rent_price }}/yr</span>
             </div>
             <div class="listing-body">
-                <h3 class="listing-title">Self-contain</h3>
-                <p class="listing-location">Oru</p>
-                <a href="#" class="listing-link">View Details</a>
+                <h3 class="listing-title">{{ listing.listing_title }}</h3>
+                <p class="listing-location">{{ listing.location.distance_desc }}</p>
+                <span class="listing-type">{{ listing.get_property_type_display }}</span>
+                <a href="{% url 'listing_detail' listing.pk %}" class="listing-link">View Details</a>
             </div>
         </article>
-
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦95,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">Self-contain</h3>
-                <p class="listing-location">Maryann</p>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
-
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦60,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">A room</h3>
-                <p class="listing-location">Ajegunle</p>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
-
-        <!-- Same pattern for your remaining "Oru / Self-contain" cards -->
+        {% empty %}
+        <p style="color: var(--color-ink-soft);">No listings yet. Check back soon.</p>
+        {% endfor %}
     </div>
 </section>
 

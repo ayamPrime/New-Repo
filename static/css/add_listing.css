@@ -1,0 +1,387 @@
+/* =========================================================
+   El Vanta — Add Listing Page
+   ---------------------------------------------------------
+   A multi-section form for agents to post new listings.
+   Sections are visually separated with card panels to
+   reduce the sense of length on a long form.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --color-bg: #EFEDE8;
+    --color-surface: #FFFFFF;
+    --color-ink: #1C1F1D;
+    --color-ink-soft: #5C6360;
+    --color-border: #E2DFD8;
+    --color-accent: #D99A3D;
+    --color-accent-soft: #F6E6CC;
+    --color-focus: #1E3A5F;
+    --color-danger: #B5482F;
+
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Work Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --radius-card: 16px;
+    --radius-input: 10px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 32px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   Page shell
+   --------------------------------------------------------- */
+
+.add-listing-page {
+    min-height: 100vh;
+    padding: 72px var(--space-3) var(--space-5);
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: var(--space-4);
+}
+
+.page-header h1 {
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.95rem;
+}
+
+/* ---------------------------------------------------------
+   Form sections — each wrapped in a card panel
+   --------------------------------------------------------- */
+
+.form-section {
+    background: var(--color-surface);
+    border-radius: var(--radius-card);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+    box-shadow:
+        0 1px 2px rgba(28, 31, 29, 0.04),
+        0 4px 12px rgba(28, 31, 29, 0.05);
+}
+
+.section-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.section-label h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    color: #FFFFFF;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------
+   Field layout
+   --------------------------------------------------------- */
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+}
+
+@media (max-width: 480px) {
+    .field-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
+.field-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    margin: 0 0 6px;
+}
+
+.field label .required {
+    color: var(--color-danger);
+    margin-left: 2px;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-input);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    outline: none;
+    transition: border-color 0.15s ease;
+    appearance: none;
+}
+
+.field input[type="text"]:focus,
+.field input[type="number"]:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: var(--color-focus);
+    background: var(--color-surface);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C6360' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+}
+
+.field-hint {
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    margin: 0;
+}
+
+/* ---------------------------------------------------------
+   Amenities checklist
+   --------------------------------------------------------- */
+
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2) var(--space-3);
+}
+
+@media (min-width: 480px) {
+    .amenities-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.amenity-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    cursor: pointer;
+}
+
+.amenity-item input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--color-border);
+    border-radius: 5px;
+    flex-shrink: 0;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.amenity-item input[type="checkbox"]:checked {
+    background: var(--color-ink);
+    border-color: var(--color-ink);
+}
+
+.amenity-item input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #FFFFFF;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+.amenity-item span {
+    font-size: 0.9rem;
+    color: var(--color-ink);
+}
+
+/* ---------------------------------------------------------
+   Media upload area
+   --------------------------------------------------------- */
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-5) var(--space-4);
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-input);
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--color-accent);
+    background: var(--color-accent-soft);
+}
+
+.upload-area input[type="file"] {
+    display: none;
+}
+
+.upload-icon {
+    font-size: 2rem;
+    color: var(--color-ink-soft);
+}
+
+.upload-area p {
+    margin: 0;
+    color: var(--color-ink-soft);
+    font-size: 0.9rem;
+}
+
+.upload-area strong {
+    color: var(--color-ink);
+}
+
+.upload-hint {
+    font-size: 0.78rem;
+    color: var(--color-ink-soft);
+    margin: var(--space-2) 0 0;
+    text-align: center;
+}
+
+.media-fields {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+/* ---------------------------------------------------------
+   Submit
+   --------------------------------------------------------- */
+
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: var(--radius-input);
+    background: var(--color-ink);
+    color: #FFFFFF;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.btn-submit:hover {
+    background: var(--color-focus);
+}
+
+.btn-submit:focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+}
+
+.btn-cancel {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-input);
+    background: transparent;
+    color: var(--color-ink-soft);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-cancel:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}

@@ -8,8 +8,6 @@
 {% block title %}Browse Listings{% endblock %}
 
 {% block content %}
-
-
 <div class="listings-page">
     <header class="listings-header">
         <h1>Find a place near OOU</h1>
@@ -17,77 +15,31 @@
     </header>
 
     <div class="listings-grid">
+        {% for listing in listings %}
         <article class="listing-card">
             <div class="listing-image">
-                <span class="listing-price">₦120,000/yr</span>
+                {% if listing.images.first %}
+                    <img
+                        src="{{ listing.images.first.image.url }}"
+                        alt="{{ listing.listing_title }}"
+                        style="width:100%; height:100%; object-fit:cover; display:block;"
+                    >
+                {% endif %}
+                <span class="listing-price">₦{{ listing.rent_price }}/yr</span>
             </div>
             <div class="listing-body">
-                <h3 class="listing-title">Self-Contain</h3>
-                <p class="listing-location">5 min walk to Main Gate</p>
-                <span class="listing-type">Self-Contain</span>
-                <a href="#" class="listing-link">View Details</a>
+                <h3 class="listing-title">{{ listing.listing_title }}</h3>
+                <p class="listing-location">{{ listing.location.distance_desc }}</p>
+                <span class="listing-type">{{ listing.get_property_type_display }}</span>
+                <a href="{% url 'listing_detail' listing.pk %}" class="listing-link">View Details</a>
             </div>
         </article>
 
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦65,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">Single Room</h3>
-                <p class="listing-location">10 min from campus, along Sagamu Road</p>
-                <span class="listing-type">Single Room</span>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
-
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦150,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">Studio Apartment</h3>
-                <p class="listing-location">Behind Faculty of Science</p>
-                <span class="listing-type">Studio</span>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
-
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦90,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">Shared Apartment</h3>
-                <p class="listing-location">Opposite Faculty of Agriculture</p>
-                <span class="listing-type">Shared</span>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
-
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦110,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">Self-Contain</h3>
-                <p class="listing-location">5 min walk to Back Gate</p>
-                <span class="listing-type">Self-Contain</span>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
-
-        <article class="listing-card">
-            <div class="listing-image">
-                <span class="listing-price">₦70,000/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">Single Room</h3>
-                <p class="listing-location">Walking distance to lecture halls</p>
-                <span class="listing-type">Single Room</span>
-                <a href="#" class="listing-link">View Details</a>
-            </div>
-        </article>
+        {% empty %}
+        <div class="no-listings">
+            <p>No listings available yet. Check back soon.</p>
+        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}

@@ -63,6 +63,7 @@ coverage.xml
 # Static & Collected Files
 staticfiles/
 static_root/
+media/
 
 # Jupyter Notebooks (if used for analysis later)
 .ipynb_checkpoints/

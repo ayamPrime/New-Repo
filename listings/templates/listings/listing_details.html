@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/listing_details.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+
+{% block title %}{{ listing.listing_title }}{% endblock %}
+
+{% block content %}
+<div class="detail-page">
+
+    <a href="{% url 'home' %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Listings
+    </a>
+
+    <!-- ── Media ───────────────────────────────────────── -->
+    <div class="media-section">
+
+        <!-- Images: loops over all uploaded images for this listing -->
+        {% if listing.images.all %}
+            <div class="image-gallery">
+                {% for image in listing.images.all %}
+                    <img
+                        class="gallery-img"
+                        src="{{ image.image.url }}"
+                        alt="Photo of {{ listing.listing_title }}"
+                    >
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="image-placeholder">
+                No photos uploaded yet
+            </div>
+        {% endif %}
+
+        <!-- Video: only renders if a video was uploaded -->
+        {% if listing.video %}
+            <div class="video-wrapper">
+                <video controls>
+                    <source src="{{ listing.video.video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <!-- ── Body: left content + right summary card ─────── -->
+    <div class="detail-body">
+
+        <!-- LEFT COLUMN -->
+        <div class="detail-main">
+
+            <!-- Title + Type -->
+            <div class="detail-panel">
+                <div class="listing-title-block">
+                    <h1>{{ listing.listing_title }}</h1>
+                    <span class="type-badge">{{ listing.get_property_type_display }}</span>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="detail-panel">
+                <h2 class="panel-heading">Location</h2>
+
+                <div class="location-row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>
+                        <span class="loc-label">Street Address</span>
+                        {{ listing.location.str_address }}
+                    </p>
+                </div>
+
+                <div class="location-row">
+                    <i class="fas fa-walking"></i>
+                    <p>
+                        <span class="loc-label">Distance from Campus</span>
+                        {{ listing.location.distance_desc }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Amenities — only shows the ones that are True -->
+            <div class="detail-panel">
+                <h2 class="panel-heading">Amenities</h2>
+                <div class="amenities-display">
+
+                    {% if listing.amenities.has_water %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-tint"></i> Running Water
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_electricity %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-bolt"></i> Electricity
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_security %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-shield-alt"></i> Security
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_bathroom %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-bath"></i> Private Bathroom
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_kitchen %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-utensils"></i> Kitchen Access
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_parking %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-car"></i> Parking Space
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_fence %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-border-all"></i> Fenced Compound
+                        </span>
+                    {% endif %}
+
+                    {% if listing.amenities.has_prepaid %}
+                        <span class="amenity-tag">
+                            <i class="fas fa-plug"></i> Prepaid Meter
+                        </span>
+                    {% endif %}
+
+                    <!-- Shown if every amenity is False -->
+                    {% if not listing.amenities.has_water and not listing.amenities.has_electricity and not listing.amenities.has_security and not listing.amenities.has_bathroom and not listing.amenities.has_kitchen and not listing.amenities.has_parking and not listing.amenities.has_fence and not listing.amenities.has_prepaid %}
+                        <p style="color: var(--color-ink-soft); font-size: 0.9rem;">No amenities listed.</p>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: summary card -->
+        <aside class="summary-card">
+
+            <!-- Price -->
+            <div class="price-display">
+                <span class="price-amount">₦{{ listing.rent_price }}</span>
+                <span class="price-period">per year</span>
+            </div>
+
+            <!-- Quick stats -->
+            <div class="summary-row">
+                <span class="s-label">Type</span>
+                <span class="s-value">{{ listing.get_property_type_display }}</span>
+            </div>
+
+            <div class="summary-row">
+                <span class="s-label">Rooms Available</span>
+                <span class="s-value">{{ listing.rooms_available }}</span>
+            </div>
+
+            <!-- Agent info -->
+            <div class="agent-block">
+                <p>Posted by</p>
+                <h3 class="agent-name">
+                    {{ listing.agent.get_full_name|default:listing.agent.username }}
+                </h3>
+                <a href="mailto:{{ listing.agent.email }}" class="btn-enquire">
+                    Enquire Now
+                </a>
+            </div>
+
+        </aside>
+
+    </div>
+
+</div>
+{% endblock %}

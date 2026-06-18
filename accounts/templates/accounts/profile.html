@@ -42,7 +42,32 @@
         {% if user.account_type == 'agent' %}
         <div class="profile-listings">
             <h3>My Listings</h3>
+
+            {% for listing in user.listings.all %}
+            <a href="{% url 'listing_detail' listing.pk %}" class="profile-listing-item">
+                <div class="profile-listing-image">
+                    {% if listing.images.first %}
+                        <img
+                            src="{{ listing.images.first.image.url }}"
+                            alt="{{ listing.listing_title }}"
+                        >
+                    {% endif %}
+                </div>
+                <div class="profile-listing-info">
+                    <span class="profile-listing-title">{{ listing.listing_title }}</span>
+                    <span class="profile-listing-type">{{ listing.get_property_type_display }}</span>
+                    <span class="profile-listing-price">₦{{ listing.rent_price }}/yr</span>
+                </div>
+                <div class="profile-listing-rooms">
+                    <span class="rooms-count">{{ listing.rooms_available }}</span>
+                    <span class="rooms-label">rooms</span>
+                </div>
+            </a>
+
+            {% empty %}
             <p class="empty-state">You haven't posted any listings yet.</p>
+            {% endfor %}
+
         </div>
         {% endif %}
 

@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/add_listing.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+
+{% block title %}Add Listing{% endblock %}
+
+{% block content %}
+<div class="add-listing-page">
+    <header class="page-header">
+        <h1>Post a Listing</h1>
+        <p>Fields marked <span style="color:#B5482F">*</span> are required.</p>
+    </header>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Section 1: Basic Info -->
+        <div class="form-section">
+            <div class="section-label">
+                <span class="section-number">1</span>
+                <h2>Basic Information</h2>
+            </div>
+            <div class="field-group">
+
+                {{ listing_form.non_field_errors }}
+
+                <div class="field">
+                    <label for="{{ listing_form.listing_title.id_for_label }}">
+                        Listing Title <span class="required">*</span>
+                    </label>
+                    {{ listing_form.listing_title }}
+                    {{ listing_form.listing_title.errors }}
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="{{ listing_form.property_type.id_for_label }}">
+                            Property Type <span class="required">*</span>
+                        </label>
+                        {{ listing_form.property_type }}
+                        {{ listing_form.property_type.errors }}
+                    </div>
+
+                    <div class="field">
+                        <label for="{{ listing_form.rooms_available.id_for_label }}">
+                            Rooms Available <span class="required">*</span>
+                        </label>
+                        {{ listing_form.rooms_available }}
+                        {{ listing_form.rooms_available.errors }}
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="{{ listing_form.rent_price.id_for_label }}">
+                        Annual Rent (₦) <span class="required">*</span>
+                    </label>
+                    {{ listing_form.rent_price }}
+                    {{ listing_form.rent_price.errors }}
+                    <p class="field-hint">Enter amount in Naira per year.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 2: Location -->
+        <div class="form-section">
+            <div class="section-label">
+                <span class="section-number">2</span>
+                <h2>Location</h2>
+            </div>
+            <div class="field-group">
+
+                {{ location_form.non_field_errors }}
+
+                <div class="field">
+                    <label for="{{ location_form.str_address.id_for_label }}">
+                        Street Address <span class="required">*</span>
+                    </label>
+                    {{ location_form.str_address }}
+                    {{ location_form.str_address.errors }}
+                </div>
+
+                <div class="field">
+                    <label for="{{ location_form.distance_desc.id_for_label }}">
+                        Distance from Campus <span class="required">*</span>
+                    </label>
+                    {{ location_form.distance_desc }}
+                    {{ location_form.distance_desc.errors }}
+                    <p class="field-hint">Help students understand how far this is from campus landmarks.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 3: Amenities -->
+        <div class="form-section">
+            <div class="section-label">
+                <span class="section-number">3</span>
+                <h2>Amenities</h2>
+            </div>
+            {{ amenities_form.non_field_errors }}
+            <div class="amenities-grid">
+                <label class="amenity-item">
+                    {{ amenities_form.has_water }}
+                    <span>Running Water</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_electricity }}
+                    <span>Electricity (NEPA)</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_security }}
+                    <span>Security</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_bathroom }}
+                    <span>Private Bathroom</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_kitchen }}
+                    <span>Private Kitchen</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_parking }}
+                    <span>Parking Space</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_fence }}
+                    <span>Fenced Compound</span>
+                </label>
+                <label class="amenity-item">
+                    {{ amenities_form.has_prepaid }}
+                    <span>Prepaid Meter</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Section 4: Media -->
+        <div class="form-section">
+            <div class="section-label">
+                <span class="section-number">4</span>
+                <h2>Photos & Video</h2>
+            </div>
+            <div class="media-fields">
+
+                <div class="field">
+                    <p class="field-label">Photo <span class="required">*</span></p>
+                    <label class="upload-area" for="{{ image_form.image.id_for_label }}">
+                        {{ image_form.image }}
+                        <i class="fas fa-images upload-icon"></i>
+                        <p><strong>Click to upload a photo</strong></p>
+                        <p>or drag and drop here</p>
+                    </label>
+                    {{ image_form.image.errors }}
+                    <p class="upload-hint">JPG, PNG, WEBP accepted.</p>
+                </div>
+
+                <div class="field">
+                    <p class="field-label">Video </p>
+                    <label class="upload-area" for="{{ video_form.video.id_for_label }}">
+                        {{ video_form.video }}
+                        <i class="fas fa-video upload-icon"></i>
+                        <p><strong>Click to upload a video</strong></p>
+                        <p>or drag and drop here</p>
+                    </label>
+                    {{ video_form.video.errors }}
+                    <p class="upload-hint">MP4 recommended. Max 100MB.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Post Listing</button>
+            <a href="{% url 'home' %}" class="btn-cancel">Cancel</a>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
