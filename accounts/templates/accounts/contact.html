@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endblock %}
+{% block title %}Sign Up — Step 3{% endblock %}
+
+{% block content %}
+<div class="form-space">
+    <div class="formgroup">
+
+        <!-- Steps 1 & 2 done, step 3 active -->
+        <div class="step-indicator">
+            <div class="step-dot done">✓</div>
+            <div class="step-line done"></div>
+            <div class="step-dot done">✓</div>
+            <div class="step-line done"></div>
+            <div class="step-dot active">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot">4</div>
+        </div>
+
+        <header id="form_header">
+            <h1>ACCOMMODATIONS HUB</h1>
+            <h3>Contact Info</h3>
+        </header>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form">
+                <div>
+                    <label for="{{ form.email.id_for_label }}">
+                        Email Address <span class="required">*</span>
+                    </label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </div>
+
+                <div>
+                    <label for="{{ form.phone_number.id_for_label }}">
+                        Phone Number <span class="required">*</span>
+                    </label>
+                    {{ form.phone_number }}
+                    {{ form.phone_number.errors }}
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Continue</button>
+            </div>
+        </form>
+
+        <div class="form_options single">
+            <p><a href="{% url 'signup_step2' %}">← Back to Step 2</a></p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

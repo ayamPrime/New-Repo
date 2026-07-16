@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/flag.css' %}">
+{% endblock %}
+
+{% block title %}Report Listing{% endblock %}
+
+{% block content %}
+<div class="flag-page">
+
+    <a href="{% url 'listing_detail' listing.pk %}" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to Listing
+    </a>
+
+    <div class="flag-card">
+
+        <header class="flag-header">
+            <h1>Report a Listing</h1>
+            <p class="flag-subtitle">
+                You are reporting: <strong>{{ listing.listing_title }}</strong>
+            </p>
+            <p class="flag-notice">
+                False reports undermine trust in El Vanta. Please only report genuine issues.
+            </p>
+        </header>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <fieldset class="reason-group">
+                <legend class="reason-legend">
+                    Select a reason <span class="required">*</span>
+                </legend>
+
+                {% for value, label in form.reason.field.choices %}
+                <label class="reason-item">
+                    <input
+                        type="radio"
+                        name="reason"
+                        value="{{ value }}"
+                        required
+                        {% if form.reason.value == value %}checked{% endif %}
+                    >
+                    <span class="reason-text">{{ label }}</span>
+                </label>
+                {% endfor %}
+
+                {{ form.reason.errors }}
+            </fieldset>
+
+            <div class="flag-actions">
+                <button type="submit" class="btn-flag-submit">Submit Report</button>
+                <a href="{% url 'listing_detail' listing.pk %}" class="btn-flag-cancel">
+                    Cancel
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

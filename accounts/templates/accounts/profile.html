@@ -12,15 +12,26 @@
     </header>
 
     <div class="profile-card">
+
+        <!-- Profile image -->
+        <div class="profile-avatar">
+            {% if user.profile.profile_image %}
+                <img src="{{ user.profile.profile_image.url }}" alt="{{ user.get_full_name }}" class="avatar-img">
+            {% else %}
+                <div class="avatar-placeholder">
+                    <span>{{ user.first_name|first|upper }}{{ user.last_name|first|upper }}</span>
+                </div>
+            {% endif %}
+            <div class="avatar-info">
+                <span class="avatar-name">{{ user.get_full_name|default:user.username }}</span>
+                <span class="value badge badge-{{ user.account_type }}">
+                    {{ user.get_account_type_display }}
+                </span>
+            </div>
+        </div>
+
+        <!-- Info ledger -->
         <div class="profile-info">
-            <div class="info-row">
-                <span class="label">First Name</span>
-                <span class="value">{{ user.first_name }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">Last Name</span>
-                <span class="value">{{ user.last_name }}</span>
-            </div>
             <div class="info-row">
                 <span class="label">Username</span>
                 <span class="value">{{ user.username }}</span>
@@ -30,19 +41,25 @@
                 <span class="value">{{ user.email }}</span>
             </div>
             <div class="info-row">
+                <span class="label">Phone</span>
+                <span class="value">{{ user.phone_number }}</span>
+            </div>
+            <div class="info-row">
                 <span class="label">Gender</span>
                 <span class="value">{{ user.get_gender_display }}</span>
             </div>
+            {% if user.dob %}
             <div class="info-row">
-                <span class="label">Account Type</span>
-                <span class="value badge badge-{{ user.account_type }}">{{ user.get_account_type_display }}</span>
+                <span class="label">Date of Birth</span>
+                <span class="value">{{ user.dob }}</span>
             </div>
+            {% endif %}
         </div>
 
+        <!-- Agent listings -->
         {% if user.account_type == 'agent' %}
         <div class="profile-listings">
             <h3>My Listings</h3>
-
             {% for listing in user.listings.all %}
             <a href="{% url 'listing_detail' listing.pk %}" class="profile-listing-item">
                 <div class="profile-listing-image">
@@ -63,20 +80,73 @@
                     <span class="rooms-label">rooms</span>
                 </div>
             </a>
-
             {% empty %}
             <p class="empty-state">You haven't posted any listings yet.</p>
             {% endfor %}
-
         </div>
         {% endif %}
 
+        <!-- Reports on my listings (landlords only) -->
+        {% if user.account_type == 'agent' %}
+        <div class="profile-reports">
+            <h3>Reports on My Listings</h3>
+            {% for listing in user.listings.all %}
+                {% for flag in listing.flags.all %}
+                <div class="report-item">
+                    <span class="report-listing-name">{{ listing.listing_title }}</span>
+                    <span class="report-reason">{{ flag.get_reason_display }}</span>
+                    <span class="report-date">{{ flag.created_at|date:"d M Y" }}</span>
+                </div>
+                {% endfor %}
+            {% empty %}
+            {% endfor %}
+            {% with total=user.listings.all|length %}
+                {% if total == 0 %}
+                <p class="empty-state">No reports on your listings.</p>
+                {% endif %}
+            {% endwith %}
+        </div>
+        {% endif %}
+
+        <!-- Reports filed by this user (tenants) -->
+        {% if user.account_type == 'student' %}
+        <div class="profile-reports">
+            <h3>Reports I've Filed</h3>
+            {% for flag in user.flags_made.all %}
+            <div class="report-item">
+                <span class="report-listing-name">{{ flag.listing.listing_title }}</span>
+                <span class="report-reason">{{ flag.get_reason_display }}</span>
+                <span class="report-date">{{ flag.created_at|date:"d M Y" }}</span>
+            </div>
+            {% empty %}
+            <p class="empty-state">You haven't filed any reports.</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Actions -->
         <div class="buttons">
-            <form action="{% url 'logout' %}" method="POST">
+            <!-- Logout -->
+            <form action="{% url 'logout' %}" method="POST" style="margin-bottom: 10px;">
                 {% csrf_token %}
-                <button type="submit">Logout</button>
+                <button type="submit" class="btn-logout">Logout</button>
+            </form>
+
+            <!-- Delete account -->
+            <form action="{% url 'delete_account' %}" method="POST" id="delete-form">
+                {% csrf_token %}
+                <button type="button" class="btn-delete" onclick="confirmDelete()">Delete Account</button>
             </form>
         </div>
+
     </div>
 </div>
+
+<script>
+function confirmDelete() {
+    if (confirm("Are you sure you want to delete your account? This cannot be undone.")) {
+        document.getElementById('delete-form').submit();
+    }
+}
+</script>
 {% endblock %}

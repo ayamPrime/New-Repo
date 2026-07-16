@@ -1,55 +1,38 @@
 /* =========================================================
-   El Vanta — Profile Page ("Resident Pass")
-   ---------------------------------------------------------
-   Concept: the profile card reads like a resident pass —
-   a perforated tear-line with two notches sits above the
-   action area, and account details sit inside an inset
-   "ledger" panel rendered in monospace, like a key-card
-   readout.
-
-   To retheme: change the values in :root below. Everything
-   else references these variables, so a new palette or
-   font swap is a few-line edit.
+   El Vanta — Profile Page
    ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root {
-    /* Core palette */
-    --color-bg: #EFEDE8;
-    --color-surface: #FFFFFF;
-    --color-ink: #1C1F1D;
-    --color-ink-soft: #5C6360;
-    --color-border: #E2DFD8;
-
-    /* Accents */
-    --color-danger: #B5482F;
+    --color-bg:           #EFEDE8;
+    --color-surface:      #FFFFFF;
+    --color-ink:          #1C1F1D;
+    --color-ink-soft:     #5C6360;
+    --color-border:       #E2DFD8;
+    --color-accent:       #D99A3D;
+    --color-accent-soft:  #F6E6CC;
+    --color-danger:       #B5482F;
     --color-danger-hover: #9A3D27;
-
-    /* Account-type badge colours (optional — see .badge below) */
-    --color-agent: #8A5A1C;
-    --color-agent-soft: #F6E6CC;
-    --color-student: #2F5D55;
+    --color-agent:        #8A5A1C;
+    --color-agent-soft:   #F6E6CC;
+    --color-student:      #2F5D55;
     --color-student-soft: #E3ECE9;
 
-    /* Type */
     --font-display: 'Bricolage Grotesque', sans-serif;
-    --font-body: 'Work Sans', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
+    --font-body:    'Work Sans', sans-serif;
+    --font-mono:    'IBM Plex Mono', monospace;
 
-    /* Layout */
-    --radius-card: 20px;
+    --radius-card:  20px;
     --radius-panel: 14px;
-    --radius-pill: 999px;
+    --radius-pill:  999px;
     --space-2: 8px;
     --space-3: 16px;
     --space-4: 24px;
-    --space-5: 32px;
+    --space-5: 40px;
 }
 
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -68,7 +51,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--space-4) var(--space-3) var(--space-5);
+    padding: 72px var(--space-3) var(--space-5);
 }
 
 #form_header {
@@ -80,7 +63,7 @@ body {
 #form_header h1 {
     margin: 0 0 4px;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -91,15 +74,15 @@ body {
     margin: 0;
     font-family: var(--font-display);
     font-size: 2rem;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--color-ink);
 }
 
 /* ---------------------------------------------------------
-   The pass itself
+   Card
    --------------------------------------------------------- */
 
 .profile-card {
-    position: relative;
     width: 100%;
     max-width: 480px;
     background: var(--color-surface);
@@ -107,17 +90,100 @@ body {
     overflow: hidden;
     box-shadow:
         0 1px 2px rgba(28, 31, 29, 0.04),
-        0 8px 24px rgba(28, 31, 29, 0.06);
+        0 8px 24px rgba(28, 31, 29, 0.08);
 }
 
-/* Inset "ledger" panel — your account record */
+/* ---------------------------------------------------------
+   Avatar block
+   --------------------------------------------------------- */
+
+.profile-avatar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.avatar-img {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border: 2px solid var(--color-border);
+    overflow: hidden;
+}
+
+.avatar-placeholder {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+}
+
+.avatar-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.avatar-name {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ---------------------------------------------------------
+   Badges
+   --------------------------------------------------------- */
+
+.badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.badge-agent {
+    background: var(--color-agent-soft);
+    color: var(--color-agent);
+}
+
+.badge-student {
+    background: var(--color-student-soft);
+    color: var(--color-student);
+}
+
+/* ---------------------------------------------------------
+   Info ledger
+   --------------------------------------------------------- */
+
 .profile-info {
     margin: var(--space-4);
     padding: var(--space-3) var(--space-4);
     background: var(--color-bg);
     border-radius: var(--radius-panel);
-    display: flex;
-    flex-direction: column;
 }
 
 .info-row {
@@ -135,49 +201,28 @@ body {
 
 .info-row .label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-ink-soft);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .info-row .value {
     font-family: var(--font-mono);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--color-ink);
     text-align: right;
     min-width: 0;
     overflow-wrap: break-word;
-}
-
-/* Optional: wrap a value in <span class="value badge"> for a pill.
-   Add badge-agent / badge-student (e.g. via Django:
-   "badge badge-{{ user.account_type }}") to colour by account type. */
-.badge {
-    display: inline-block;
-    padding: 2px 12px;
-    border-radius: var(--radius-pill);
-    background: var(--color-border);
-    color: var(--color-ink);
-    font-size: 0.8rem;
-    letter-spacing: 0.04em;
-}
-
-.badge-agent {
-    background: var(--color-agent-soft);
-    color: var(--color-agent);
-}
-
-.badge-student {
-    background: var(--color-student-soft);
-    color: var(--color-student);
+    word-break: break-all;
 }
 
 /* ---------------------------------------------------------
-   Agent-only listings section
+   Agent listings section
    --------------------------------------------------------- */
 
 .profile-listings {
@@ -185,47 +230,50 @@ body {
 }
 
 .profile-listings h3 {
-    margin: 0 0 var(--space-2);
+    margin: 0 0 var(--space-3);
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 600;
-}
-
-.empty-state {
-    margin: 0;
-    padding: var(--space-3);
-    border: 1.5px dashed var(--color-border);
-    border-radius: 12px;
-    color: var(--color-ink-soft);
-    font-size: 0.9rem;
-    text-align: center;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .profile-listing-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 0;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
     border-bottom: 1px solid var(--color-border);
     text-decoration: none;
     color: var(--color-ink);
+    transition: background 0.12s ease;
 }
 
-.profile-listing-item:last-child { border-bottom: none; }
+.profile-listing-item:last-child {
+    border-bottom: none;
+}
+
+.profile-listing-item:hover {
+    opacity: 0.8;
+}
 
 .profile-listing-image {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
     border-radius: 8px;
     overflow: hidden;
     background: var(--color-bg);
-    flex-shrink: 0;
+    border: 1px solid var(--color-border);
 }
 
 .profile-listing-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
+    display: block;
 }
 
 .profile-listing-info {
@@ -233,11 +281,17 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    min-width: 0;
 }
 
 .profile-listing-title {
+    font-family: var(--font-body);
     font-weight: 600;
     font-size: 0.9rem;
+    color: var(--color-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .profile-listing-type {
@@ -247,7 +301,7 @@ body {
 
 .profile-listing-price {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--color-accent);
     font-weight: 600;
 }
@@ -257,33 +311,47 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1px;
+    flex-shrink: 0;
 }
 
 .rooms-count {
     font-family: var(--font-mono);
     font-size: 1.1rem;
     font-weight: 700;
+    color: var(--color-ink);
 }
 
 .rooms-label {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--color-ink-soft);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
 
+.empty-state {
+    margin: 0;
+    padding: var(--space-3);
+    border: 1.5px dashed var(--color-border);
+    border-radius: 10px;
+    color: var(--color-ink-soft);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
 /* ---------------------------------------------------------
-   Action area — perforated tear-line + logout
+   Action area — perforated tear-line
    --------------------------------------------------------- */
 
 .buttons {
     position: relative;
     padding: var(--space-4);
     border-top: 2px dashed var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
 }
 
-/* Notches that "bite" into the card edges, in sync with the
-   dashed line above — clipped by .profile-card's overflow:hidden */
+/* Notches that bite into card edges */
 .buttons::before,
 .buttons::after {
     content: '';
@@ -296,21 +364,36 @@ body {
     transform: translateY(-50%);
 }
 
-.buttons::before {
-    left: -10px;
-}
-
-.buttons::after {
-    right: -10px;
-}
+.buttons::before { left: -10px; }
+.buttons::after  { right: -10px; }
 
 .buttons form {
     margin: 0;
 }
 
-.buttons button[type="submit"] {
+/* Logout — outline style */
+.btn-logout {
     width: 100%;
-    padding: var(--space-3);
+    padding: 12px var(--space-3);
+    border: 1.5px solid var(--color-border);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-logout:hover {
+    border-color: var(--color-ink);
+}
+
+/* Delete — destructive red */
+.btn-delete {
+    width: 100%;
+    padding: 12px var(--space-3);
     border: none;
     border-radius: 12px;
     background: var(--color-danger);
@@ -322,17 +405,63 @@ body {
     transition: background-color 0.15s ease;
 }
 
-.buttons button[type="submit"]:hover {
+.btn-delete:hover {
     background: var(--color-danger-hover);
 }
 
-.buttons button[type="submit"]:focus-visible {
+.btn-logout:focus-visible,
+.btn-delete:focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 2px;
 }
 
+.profile-reports {
+    padding: 0 var(--space-4) var(--space-4);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-3);
+}
+
+.profile-reports h3 {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.report-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.85rem;
+    flex-wrap: wrap;
+}
+
+.report-item:last-child { border-bottom: none; }
+
+.report-listing-name {
+    font-weight: 600;
+    color: var(--color-ink);
+    flex: 1;
+}
+
+.report-reason {
+    color: var(--color-danger);
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+}
+
+.report-date {
+    color: var(--color-ink-soft);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    white-space: nowrap;
+}
+
 /* ---------------------------------------------------------
-   Larger screens
+   Responsive
    --------------------------------------------------------- */
 
 @media (min-width: 640px) {
@@ -349,12 +478,6 @@ body {
     }
 }
 
-/* ---------------------------------------------------------
-   Respect reduced-motion preferences
-   --------------------------------------------------------- */
-
 @media (prefers-reduced-motion: reduce) {
-    * {
-        transition: none !important;
-    }
+    * { transition: none !important; }
 }

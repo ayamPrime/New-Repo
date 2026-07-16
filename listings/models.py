@@ -72,3 +72,33 @@ class ListingVideo(models.Model):
 
     def __str__(self):
         return f"Video for {self.listing.listing_title}"
+    
+class ListingFlag(models.Model):
+    class Reason(models.TextChoices):
+        FAKE = 'fake', 'Fake or fraudulent listing'
+        WRONG_PRICE = 'wrong_price', 'Price is incorrect'
+        ALREADY_TAKEN = 'already_taken', 'Room is no longer available'
+        WRONG_LOCATION = 'wrong_location', 'Location is incorrect'
+        INAPPROPRIATE = 'inappropriate', 'Inappropriate content'
+        OTHER = 'other', 'Other'
+
+    listing = models.ForeignKey(
+        Listing,
+        on_delete=models.CASCADE,
+        related_name='flags'
+    )
+    flagged_by = models.ForeignKey(
+        'accounts.CustomUser',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='flags_made'
+    )
+    reason = models.CharField(max_length=20, choices=Reason.choices)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        # One flag per user per listing — prevents spam flagging
+        unique_together = ('listing', 'flagged_by')
+
+    def __str__(self):
+        return f"{self.listing.listing_title} flagged for {self.reason}"

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Listing, Location, Amenities, ListingImage, ListingVideo
+from .models import Listing, Location, Amenities, ListingImage, ListingVideo, ListingFlag
 
 class ListingForm(forms.ModelForm):
     class Meta:
@@ -29,3 +29,8 @@ class ListingVideoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['video'].required = False
+
+class ListingFlagForm(forms.ModelForm):
+    class Meta:
+        model = ListingFlag
+        fields = ['reason']

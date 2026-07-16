@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+{% endblock %}
+{% block title %}Sign Up — Step 4{% endblock %}
+
+{% block content %}
+<div class="form-space">
+    <div class="formgroup">
+
+        <!-- All steps done, step 4 active -->
+        <div class="step-indicator">
+            <div class="step-dot done">✓</div>
+            <div class="step-line done"></div>
+            <div class="step-dot done">✓</div>
+            <div class="step-line done"></div>
+            <div class="step-dot done">✓</div>
+            <div class="step-line done"></div>
+            <div class="step-dot active">4</div>
+        </div>
+
+        <header id="form_header">
+            <h1>ACCOMMODATIONS HUB</h1>
+            <h3>Profile Picture</h3>
+        </header>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form">
+                <div>
+                    <p class="upload-hint" style="margin: 0 0 8px; font-size: 0.85rem; color: var(--color-ink-soft);">
+                        {% if is_agent %}
+                            A profile photo is <strong>required</strong> for agents — students feel more confident contacting someone they can see.
+                        {% else %}
+                            A profile photo is optional but recommended.
+                        {% endif %}
+                    </p>
+
+                    <label class="upload-area" for="{{ form.profile_image.id_for_label }}">
+                        {{ form.profile_image }}
+                        <i class="fas fa-user-circle upload-icon"></i>
+                        <p><strong>Click to upload a photo</strong></p>
+                        <p>or drag and drop here</p>
+                    </label>
+                    {{ form.profile_image.errors }}
+                    <p class="upload-hint">JPG or PNG. Square photos work best.</p>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">
+                    {% if is_agent %}Complete Sign Up{% else %}Finish{% endif %}
+                </button>
+            </div>
+        </form>
+
+        <div class="form_options single">
+            <p><a href="{% url 'signup_step3' %}">← Back to Step 3</a></p>
+        </div>
+
+    </div>
+</div>
+
+<script src="{% static 'js/upload.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'css/style.css' %}">{% endblock %}
+{% block title %}Sign Up — Step 1{% endblock %}
+
+{% block content %}
+<div class="form-space">
+    <div class="formgroup">
+
+        <!-- Step indicator: step 1 active, 2/3/4 pending -->
+        <div class="step-indicator">
+            <div class="step-dot active">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot">4</div>
+        </div>
+
+        <header id="form_header">
+            <h1>ACCOMMODATIONS HUB</h1>
+            <h3>Personal Info</h3>
+        </header>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="form">
+                <div>
+                    <label for="{{ form.first_name.id_for_label }}">
+                        First Name <span class="required">*</span>
+                    </label>
+                    {{ form.first_name }}
+                    {{ form.first_name.errors }}
+                </div>
+
+                <div>
+                    <label for="{{ form.last_name.id_for_label }}">
+                        Last Name <span class="required">*</span>
+                    </label>
+                    {{ form.last_name }}
+                    {{ form.last_name.errors }}
+                </div>
+
+                <div>
+                    <label for="{{ form.dob.id_for_label }}">Date of Birth</label>
+                    {{ form.dob }}
+                    {{ form.dob.errors }}
+                </div>
+
+                <div>
+                    <label for="{{ form.gender.id_for_label }}">
+                        Gender <span class="required">*</span>
+                    </label>
+                    {{ form.gender }}
+                    {{ form.gender.errors }}
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Continue</button>
+            </div>
+        </form>
+
+        <div class="form_options">
+            <p>Already have an account? <br><a href="{% url 'login' %}">Log In</a></p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

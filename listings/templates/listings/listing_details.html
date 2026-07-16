@@ -3,6 +3,7 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/listing_details.css' %}">
+<link rel="stylesheet" href="{% static 'css/flag.css' %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 {% endblock %}
 
@@ -148,34 +149,65 @@
         <!-- RIGHT COLUMN: summary card -->
         <aside class="summary-card">
 
-            <!-- Price -->
             <div class="price-display">
                 <span class="price-amount">₦{{ listing.rent_price }}</span>
                 <span class="price-period">per year</span>
             </div>
 
-            <!-- Quick stats -->
             <div class="summary-row">
                 <span class="s-label">Type</span>
                 <span class="s-value">{{ listing.get_property_type_display }}</span>
             </div>
-
             <div class="summary-row">
                 <span class="s-label">Rooms Available</span>
                 <span class="s-value">{{ listing.rooms_available }}</span>
             </div>
 
-            <!-- Agent info -->
             <div class="agent-block">
-                <p>Posted by</p>
-                <h3 class="agent-name">
-                    {{ listing.agent.get_full_name|default:listing.agent.username }}
-                </h3>
-                <a href="mailto:{{ listing.agent.email }}" class="btn-enquire">
-                    Enquire Now
-                </a>
+                <p class="agent-eyebrow">Posted by</p>
+
+                <div class="agent-identity">
+                    {% if listing.agent.profile.profile_image %}
+                        <img
+                            src="{{ listing.agent.profile.profile_image.url }}"
+                            alt="{{ listing.agent.get_full_name }}"
+                            class="agent-avatar"
+                        >
+                    {% else %}
+                        <div class="agent-avatar-placeholder">
+                            {{ listing.agent.first_name|first|upper }}{{ listing.agent.last_name|first|upper }}
+                        </div>
+                    {% endif %}
+                    <div>
+                        <h3 class="agent-name">
+                            {{ listing.agent.get_full_name|default:listing.agent.username }}
+                        </h3>
+                        <!-- Rating placeholder — wired when Rating model is built -->
+                        <div class="agent-rating-placeholder">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-label">No ratings yet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-stack">
+                    <a href="mailto:{{ listing.agent.email }}" class="btn-enquire">
+                        Enquire Now
+                    </a>
+                    <a href="{% url 'inspection_request' listing.pk %}" class="btn-inspect">
+                        Book Inspection
+                    </a>
+                    <a href="{% url 'pay_rent' listing.pk %}" class="btn-pay">
+                        Pay Rent Now
+                    </a>
+                </div>
             </div>
 
+            <div class="flag-link">
+                <a href="{% url 'flag_listing' listing.pk %}">
+                    <i class="fas fa-flag"></i> Report this listing
+                </a>
+            </div>
         </aside>
 
     </div>
