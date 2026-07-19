@@ -4,26 +4,26 @@ from phonenumber_field.formfields import PhoneNumberField
 from .models import CustomUser, UserProfile
 
 class PersonalInfoForm(forms.Form):
-    first_name = forms.CharField(max_length=150)
-    last_name = forms.CharField(max_length=150)
+    first_name = forms.CharField(max_length = 150)
+    last_name = forms.CharField(max_length = 150)
     dob = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
-        required=False,
-        label='Date of Birth'
+        widget = forms.DateInput(attrs = {'type': 'date'}),
+        required = False,
+        label = 'Date of Birth'
     )
-    gender = forms.ChoiceField(choices=CustomUser.Gender.choices)
+    gender = forms.ChoiceField(choices = CustomUser.Gender.choices)
 
 
 class AccountInfoForm(forms.Form):
-    username = forms.CharField(max_length=150)
-    account_type = forms.ChoiceField(choices=CustomUser.AccType.choices)
+    username = forms.CharField(max_length = 150)
+    account_type = forms.ChoiceField(choices = CustomUser.AccType.choices)
     password1 = forms.CharField(
-        label='Password',
-        widget=forms.PasswordInput
+        label = 'Password',
+        widget = forms.PasswordInput
     )
     password2 = forms.CharField(
-        label='Confirm Password',
-        widget=forms.PasswordInput
+        label = 'Confirm Password',
+        widget = forms.PasswordInput
     )
 
     def clean_username(self):
@@ -51,9 +51,23 @@ class AccountInfoForm(forms.Form):
 
 class ContactInfoForm(forms.Form):
     email = forms.EmailField()
-    phone_number = PhoneNumberField(region='NG')
+    phone_number = PhoneNumberField(region = 'NG')
 
 class ProfilePictureForm(forms.ModelForm):
+    agree_to_terms = forms.BooleanField(
+        required = True,
+        error_messages = {'required': 'You must agree to the Terms of Service to create an account.'}
+    )
+    agree_to_privacy = forms.BooleanField(
+        required=True,
+        label = "I have read and accept the Privacy Policy",
+        error_messages = {'required': 'You must agree to the Privacy Policy to create an account.'}
+    )
+    lister_onboarding_agreement = forms.BooleanField(
+        required = True,
+        label = "I have read and agree to the Lister Onboarding Agreement",
+        error_messages = {'required': 'You must agree to the Lister Onboarding Agreement to create an account.'}
+    )   
     class Meta:
         model = UserProfile
         fields = ['profile_image']

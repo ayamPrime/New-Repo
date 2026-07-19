@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ object.title }}</h1>
+<p><small>Version {{ object.version }} — last updated {{ object.updated_at|date:"F j, Y" }}</small></p>
+<div class="legal-content">
+  {{ object.content|linebreaks }}
+</div>
+{% endblock %}

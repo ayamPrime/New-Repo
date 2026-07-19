@@ -166,20 +166,20 @@
                 <p class="agent-eyebrow">Posted by</p>
 
                 <div class="agent-identity">
-                    {% if listing.agent.profile.profile_image %}
+                    {% if listing.lister.profile.profile_image %}
                         <img
-                            src="{{ listing.agent.profile.profile_image.url }}"
-                            alt="{{ listing.agent.get_full_name }}"
+                            src="{{ listing.lister.profile.profile_image.url }}"
+                            alt="{{ listing.lister.get_full_name }}"
                             class="agent-avatar"
                         >
                     {% else %}
                         <div class="agent-avatar-placeholder">
-                            {{ listing.agent.first_name|first|upper }}{{ listing.agent.last_name|first|upper }}
+                            {{ listing.lister.first_name|first|upper }}{{ listing.lister.last_name|first|upper }}
                         </div>
                     {% endif %}
                     <div>
                         <h3 class="agent-name">
-                            {{ listing.agent.get_full_name|default:listing.agent.username }}
+                            {{ listing.lister.get_full_name|default:listing.lister.username }}
                         </h3>
                         <!-- Rating placeholder — wired when Rating model is built -->
                         <div class="agent-rating-placeholder">

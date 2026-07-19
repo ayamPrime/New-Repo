@@ -34,8 +34,8 @@
             <div class="form">
                 <div>
                     <p class="upload-hint" style="margin: 0 0 8px; font-size: 0.85rem; color: var(--color-ink-soft);">
-                        {% if is_agent %}
-                            A profile photo is <strong>required</strong> for agents — students feel more confident contacting someone they can see.
+                        {% if is_lister %}
+                            A profile photo is <strong>required</strong> for listers — students feel more confident contacting someone they can see.
                         {% else %}
                             A profile photo is optional but recommended.
                         {% endif %}
@@ -51,10 +51,28 @@
                     <p class="upload-hint">JPG or PNG. Square photos work best.</p>
                 </div>
             </div>
+            
+            <div class="form-check">
+            {{ form.agree_to_terms }}
+            <label>I have read and agree to the <a href="{% url 'legal_document' 'terms' %}" target="_blank">Terms of Service</a></label>
+            </div>
+            {{ form.agree_to_terms.errors }}
+
+            <div class="form-check">
+            {{ form.agree_to_privacy }}
+            <label>I have read and agree to the <a href="{% url 'legal_document' 'privacy' %}" target="_blank">Privacy Policy</a></label>
+            </div>
+            {{ form.agree_to_privacy.errors }}
+
+            <div class="form-check">
+            {{ form.lister_onboarding_agreement }}
+            <label>I have read and agree to the <a href="{% url 'legal_document' 'lister_onboarding' %}" target="_blank">Lister Onboarding Agreement</a></label>
+            </div>
+            {{ form.lister_onboarding_agreement.errors }}
 
             <div class="buttons">
                 <button type="submit">
-                    {% if is_agent %}Complete Sign Up{% else %}Finish{% endif %}
+                    {% if is_lister %}Complete Sign Up{% else %}Finish{% endif %}
                 </button>
             </div>
         </form>

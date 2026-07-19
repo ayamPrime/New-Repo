@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Legal</h1>
+<ul>
+  {% for doc in documents %}
+    <li><a href="{% url 'legal_document' doc.slug %}">{{ doc.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,15 @@
+.legal-content {
+  max-width: 70ch;        /* readable line length, not full page width */
+  margin: 0 auto;
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.legal-content p {
+  margin-bottom: 1.2rem;
+}
+
+.legal-content h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}

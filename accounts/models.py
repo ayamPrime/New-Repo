@@ -17,6 +17,15 @@ class CustomUser(AbstractUser):
     gender = models.CharField(max_length = 7, choices = Gender.choices)
     dob = models.DateField(blank=True, null=True)
     phone_number = PhoneNumberField(blank=True, null=True, unique=True)
+    agreed_to_terms = models.BooleanField(default=False)
+    agreed_to_terms_at = models.DateTimeField(null=True, blank=True)
+    terms_version = models.CharField(max_length=20, blank=True)
+    agreed_to_privacy = models.BooleanField(default=False)
+    agreed_to_privacy_at = models.DateTimeField(null=True, blank=True)
+    privacy_version = models.CharField(max_length=20, blank=True)
+    agreed_to_lister_onboarding = models.BooleanField(default=False)
+    agreed_to_lister_onboarding_at = models.DateTimeField(null=True, blank=True)
+    lister_onboarding_version = models.CharField(max_length=20, blank=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(

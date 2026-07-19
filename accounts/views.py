@@ -6,9 +6,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django_ratelimit.decorators import ratelimit
+from django.utils import timezone
 from datetime import date
 from .forms import PersonalInfoForm, AccountInfoForm, ContactInfoForm, ProfilePictureForm
 from .models import CustomUser, UserProfile
+from legal.models import LegalDocument
 
 def signup_step1(request):
     if request.method == 'POST':
@@ -73,13 +75,13 @@ def signup_step4(request):
  
     # Read account_type from the session to decide if image is required
     account_type = request.session.get('signup_step2', {}).get('account_type')
-    is_agent = account_type == 'agent'
+    is_lister = account_type == 'lister'
  
     if request.method == 'POST':
         form = ProfilePictureForm(request.POST, request.FILES)
  
-        # Enforce required image for agents at validation time
-        if is_agent:
+        # Enforce required image for listers at validation time
+        if is_lister:
             form.fields['profile_image'].required = True
  
         if form.is_valid():
@@ -99,22 +101,34 @@ def signup_step4(request):
             try:
                 with transaction.atomic():
                     user = CustomUser.objects.create_user(
-                        username=     step2['username'],
-                        email=        step3['email'],
-                        password=     step2['password'],
-                        first_name=   step1['first_name'],
-                        last_name=    step1['last_name'],
-                        gender=       step1['gender'],
-                        account_type= step2['account_type'],
-                        phone_number= step3['phone_number'],
-                        dob=          dob,
+                        username =     step2['username'],
+                        email =        step3['email'],
+                        password =     step2['password'],
+                        first_name =   step1['first_name'],
+                        last_name =    step1['last_name'],
+                        gender =       step1['gender'],
+                        account_type = step2['account_type'],
+                        phone_number = step3['phone_number'],
+                        dob =          dob,
                     )
         
                     # ── Create UserProfile ─────────────────────────────
                     # Always created for every user — image may be empty.
                     # commit=False lets us attach the user before saving.
+                    terms = LegalDocument.objects.get(doc_type="terms")
+                    privacy = LegalDocument.objects.get(doc_type="privacy")
+                    lister_onboarding = LegalDocument.objects.get(doc_type="lister_onboarding")
                     profile = form.save(commit=False)
                     profile.user = user
+                    profile.agreed_to_terms = True
+                    profile.agreed_to_terms_at = timezone.now()
+                    profile.terms_version = terms.version
+                    profile.agreed_to_privacy = True
+                    profile.agreed_to_privacy_at = timezone.now()
+                    profile.privacy_version = privacy.version
+                    profile.agreed_to_lister_onboarding = True
+                    profile.agreed_to_lister_onboarding_at = timezone.now()
+                    profile.lister_onboarding_version = lister_onboarding.version
                     profile.save()
             except Exception as e:
                 # If anything fails, the whole transaction rolls back.
@@ -123,7 +137,7 @@ def signup_step4(request):
                 form.add_error(None, "Something went wrong. Please try again. {e}")
                 return render(request, 'accounts/profile_image.html', {
                     'form':     form,
-                    'is_agent': is_agent,
+                    'is_lister': is_lister,
                 })
  
             # ── Clean up session ───────────────────────────────
@@ -134,18 +148,18 @@ def signup_step4(request):
                     pass
  
             # ── Log the user in immediately ────────────────────
-            auth_login(request, user)
-            messages.success(request, f"Welcome to El Vanta, {user.first_name}!")
-            return redirect('home')
+            # auth_login(request, user)
+            # messages.success(request, f"Welcome to El Vanta, {user.first_name}!")
+            return redirect('login')
  
     else:
         form = ProfilePictureForm()
-        if is_agent:
+        if is_lister:
             form.fields['profile_image'].required = True
  
     return render(request, 'accounts/profile_image.html', {
         'form':     form,
-        'is_agent': is_agent,
+        'is_lister': is_lister,
     })
 
 @ratelimit(key='ip', rate='5/m', method='POST', block=True)
@@ -161,6 +175,7 @@ def login(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
 
+@login_required
 def logout(request):
     auth_logout(request)
     messages.success(request, 'Logout successful')

@@ -16,7 +16,7 @@ def listings_page(request):
 
 @login_required
 def add_listings(request):
-    if request.user.account_type != 'agent':
+    if request.user.account_type != 'lister':
         return redirect('home')
 
     if request.method == 'POST':
@@ -71,7 +71,7 @@ def flag_listing(request, pk):
     listing = get_object_or_404(Listing, pk=pk)
 
     # Prevent flagging your own listing
-    if request.user == listing.agent:
+    if request.user == listing.lister:
         messages.error(request, "You cannot report your own listing.")
         return redirect('listing_detail', pk=pk)
 

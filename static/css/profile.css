@@ -1,46 +1,12 @@
 /* =========================================================
    El Vanta — Profile Page
+   ---------------------------------------------------------
+   Depends on base.css for: CSS variables, font import,
+   box-sizing reset, body base styles, reduced-motion global.
+
+   NOTE: --color-danger-hover, --color-agent, and --radius-pill
+   now live in base.css — add them there if you haven't yet.
    ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
-:root {
-    --color-bg:           #EFEDE8;
-    --color-surface:      #FFFFFF;
-    --color-ink:          #1C1F1D;
-    --color-ink-soft:     #5C6360;
-    --color-border:       #E2DFD8;
-    --color-accent:       #D99A3D;
-    --color-accent-soft:  #F6E6CC;
-    --color-danger:       #B5482F;
-    --color-danger-hover: #9A3D27;
-    --color-agent:        #8A5A1C;
-    --color-agent-soft:   #F6E6CC;
-    --color-student:      #2F5D55;
-    --color-student-soft: #E3ECE9;
-
-    --font-display: 'Bricolage Grotesque', sans-serif;
-    --font-body:    'Work Sans', sans-serif;
-    --font-mono:    'IBM Plex Mono', monospace;
-
-    --radius-card:  20px;
-    --radius-panel: 14px;
-    --radius-pill:  999px;
-    --space-2: 8px;
-    --space-3: 16px;
-    --space-4: 24px;
-    --space-5: 40px;
-}
-
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    background: var(--color-bg);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-    line-height: 1.5;
-}
 
 /* ---------------------------------------------------------
    Page shell
@@ -86,7 +52,7 @@ body {
     width: 100%;
     max-width: 480px;
     background: var(--color-surface);
-    border-radius: var(--radius-card);
+    border-radius: var(--radius-card-lg);
     overflow: hidden;
     box-shadow:
         0 1px 2px rgba(28, 31, 29, 0.04),
@@ -166,13 +132,13 @@ body {
 }
 
 .badge-agent {
-    background: var(--color-agent-soft);
+    background: var(--color-accent-soft);
     color: var(--color-agent);
 }
 
 .badge-student {
-    background: var(--color-student-soft);
-    color: var(--color-student);
+    background: var(--color-success-soft);
+    color: var(--color-success);
 }
 
 /* ---------------------------------------------------------
@@ -183,7 +149,7 @@ body {
     margin: var(--space-4);
     padding: var(--space-3) var(--space-4);
     background: var(--color-bg);
-    border-radius: var(--radius-panel);
+    border-radius: 14px;
 }
 
 .info-row {
@@ -351,7 +317,6 @@ body {
     gap: var(--space-2);
 }
 
-/* Notches that bite into card edges */
 .buttons::before,
 .buttons::after {
     content: '';
@@ -371,7 +336,6 @@ body {
     margin: 0;
 }
 
-/* Logout — outline style */
 .btn-logout {
     width: 100%;
     padding: 12px var(--space-3);
@@ -390,7 +354,6 @@ body {
     border-color: var(--color-ink);
 }
 
-/* Delete — destructive red */
 .btn-delete {
     width: 100%;
     padding: 12px var(--space-3);
@@ -476,8 +439,4 @@ body {
     #form_header h3 {
         font-size: 2.25rem;
     }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
 }

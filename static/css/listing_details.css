@@ -1,46 +1,18 @@
 /* =========================================================
-   El Vanta — Listing Detail Page
+   El Vanta — Listing Detail Page + Flag/Report Page
    ---------------------------------------------------------
-   Single listing view. Two-column layout on desktop:
-   main content left, summary card pinned right.
-   Stacks to single column on mobile.
+   Single listing view (two-column desktop layout) and the
+   flag/report listing form. Kept in one file since the flag
+   page is reached only from the detail page and reuses its
+   agent block + action-button styling.
+
+   Depends on base.css for: CSS variables, font import,
+   box-sizing reset, body base styles, reduced-motion global.
+
+   NOTE: --color-success-soft, --color-danger-bg, and
+   --radius-card-lg now live in base.css — add them there
+   if you haven't yet.
    ========================================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
-:root {
-    --color-bg:          #EFEDE8;
-    --color-surface:     #FFFFFF;
-    --color-ink:         #1C1F1D;
-    --color-ink-soft:    #5C6360;
-    --color-border:      #E2DFD8;
-    --color-accent:      #D99A3D;
-    --color-accent-soft: #F6E6CC;
-    --color-navy:        #1E3A5F;
-    --color-green:       #2F5D55;
-    --color-green-soft:  #E3ECE9;
-
-    --font-display: 'Bricolage Grotesque', sans-serif;
-    --font-body:    'Work Sans', sans-serif;
-    --font-mono:    'IBM Plex Mono', monospace;
-
-    --radius-card:  16px;
-    --radius-input: 10px;
-    --space-2: 8px;
-    --space-3: 16px;
-    --space-4: 24px;
-    --space-5: 40px;
-}
-
-* { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    background: var(--color-bg);
-    color: var(--color-ink);
-    font-family: var(--font-body);
-    line-height: 1.5;
-}
 
 /* ---------------------------------------------------------
    Page shell
@@ -52,7 +24,6 @@ body {
     margin: 0 auto;
 }
 
-/* Back link */
 .back-link {
     display: inline-flex;
     align-items: center;
@@ -85,7 +56,6 @@ body {
     overflow: hidden;
 }
 
-/* Show up to 3 images side-by-side if they exist */
 @media (min-width: 640px) {
     .image-gallery {
         grid-template-columns: 2fr 1fr;
@@ -104,7 +74,6 @@ body {
     background: linear-gradient(135deg, #DCE6E2, #C9D6D1);
 }
 
-/* Placeholder shown when no images uploaded yet */
 .image-placeholder {
     aspect-ratio: 16 / 7;
     background: linear-gradient(135deg, #DCE6E2, #C9D6D1);
@@ -175,7 +144,6 @@ body {
     border-bottom: 1px solid var(--color-border);
 }
 
-/* Title block */
 .listing-title-block {
     margin-bottom: var(--space-2);
 }
@@ -201,7 +169,6 @@ body {
     border-radius: 999px;
 }
 
-/* Location rows */
 .location-row {
     display: flex;
     gap: var(--space-3);
@@ -236,7 +203,6 @@ body {
     margin-bottom: 2px;
 }
 
-/* Amenities grid */
 .amenities-display {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -256,8 +222,8 @@ body {
     padding: var(--space-2) var(--space-3);
     border-radius: 8px;
     font-size: 0.85rem;
-    background: var(--color-green-soft);
-    color: var(--color-green);
+    background: var(--color-success-soft);
+    color: var(--color-success);
     font-weight: 500;
 }
 
@@ -327,7 +293,7 @@ body {
     font-weight: 600;
 }
 
-/* Agent block */
+/* Agent block (summary card) */
 .agent-block {
     margin-top: var(--space-3);
     padding-top: var(--space-3);
@@ -343,153 +309,258 @@ body {
     text-transform: uppercase;
 }
 
-.agent-name {
-    font-family: var(--font-display);
-    font-size: 1rem;
-    font-weight: 700;
+/* ---------------------------------------------------------
+   Agent identity block (used on detail page)
+   --------------------------------------------------------- */
+
+.agent-eyebrow {
     margin: 0 0 var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
 }
 
+.agent-identity {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: var(--space-3);
+}
+
+.agent-avatar {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    border: 2px solid var(--color-border);
+    display: block;
+}
+
+.agent-avatar-placeholder {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+}
+
+/* Only surviving definition — see note above about the deleted duplicate */
+.agent-name {
+    margin: 0 0 4px;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-ink);
+}
+
+.agent-rating-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stars {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.rating-label {
+    font-size: 0.75rem;
+    color: var(--color-ink-soft);
+}
+
+/* ---------------------------------------------------------
+   Action buttons — matched set, stacked in summary card
+   --------------------------------------------------------- */
+
+.action-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+}
+
+/* Only surviving definition — see note above about the deleted duplicate */
 .btn-enquire {
     display: block;
     width: 100%;
-    padding: 13px;
+    padding: 11px;
     background: var(--color-navy);
     color: #FFFFFF;
     text-align: center;
+    text-decoration: none;
     font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     border: none;
     border-radius: var(--radius-input);
     cursor: pointer;
-    text-decoration: none;
     transition: background 0.15s ease;
 }
 
-.btn-enquire:hover { background: var(--color-ink); }
+.btn-enquire:hover { background: var(--color-navy-hover); }
 
-/* =========================================================
-   El Vanta — Flag / Report Listing Page + Detail page additions
-   ========================================================= */
+.btn-inspect {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background: var(--color-success);
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-input);
+    transition: background 0.15s ease;
+}
+
+.btn-inspect:hover { background: #254840; }
+
+.btn-pay {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background: var(--color-accent);
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-input);
+    transition: background 0.15s ease;
+}
+
+.btn-pay:hover { background: #C4892E; }
+
+.flag-link {
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.flag-link a {
+    font-size: 0.8rem;
+    color: var(--color-ink-soft);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s ease;
+}
+
+.flag-link a:hover { color: var(--color-danger); }
 
 /* ---------------------------------------------------------
-   Flag page shell
+   Flag / Report listing page
    --------------------------------------------------------- */
 
 .flag-page {
     min-height: 100vh;
-    padding: 72px 16px 40px;
+    padding: 72px var(--space-3) var(--space-5);
     max-width: 520px;
     margin: 0 auto;
 }
 
-.back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #5C6360;
-    text-decoration: none;
-    margin-bottom: 24px;
-    transition: color 0.15s ease;
-}
-
-.back-link:hover { color: #1C1F1D; }
-
-/* ---------------------------------------------------------
-   Flag card
-   --------------------------------------------------------- */
-
 .flag-card {
-    background: #FFFFFF;
-    border-radius: 20px;
-    padding: 32px 24px;
+    background: var(--color-surface);
+    border-radius: var(--radius-card-lg);
+    padding: 32px var(--space-4);
     box-shadow:
         0 1px 2px rgba(28,31,29,0.04),
         0 8px 24px rgba(28,31,29,0.07);
 }
 
 .flag-header {
-    margin-bottom: 24px;
+    margin-bottom: var(--space-4);
     padding-bottom: 20px;
-    border-bottom: 1px solid #E2DFD8;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .flag-header h1 {
     margin: 0 0 6px;
-    font-family: 'Bricolage Grotesque', sans-serif;
+    font-family: var(--font-display);
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1C1F1D;
+    color: var(--color-ink);
 }
 
 .flag-subtitle {
     margin: 0 0 10px;
     font-size: 0.9rem;
-    color: #5C6360;
+    color: var(--color-ink-soft);
 }
 
 .flag-subtitle strong {
-    color: #1C1F1D;
+    color: var(--color-ink);
 }
 
 .flag-notice {
     margin: 0;
     padding: 10px 14px;
-    background: #FEF2F0;
-    border-left: 3px solid #B5482F;
+    background: var(--color-danger-bg);
+    border-left: 3px solid var(--color-danger);
     border-radius: 0 8px 8px 0;
     font-size: 0.82rem;
-    color: #B5482F;
+    color: var(--color-danger);
 }
-
-/* ---------------------------------------------------------
-   Reason radio buttons
-   --------------------------------------------------------- */
 
 .reason-group {
     border: none;
     padding: 0;
-    margin: 0 0 24px;
+    margin: 0 0 var(--space-4);
 }
 
 .reason-legend {
     display: block;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 500;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #5C6360;
+    color: var(--color-ink-soft);
     margin-bottom: 14px;
 }
 
-.required { color: #B5482F; }
+.required { color: var(--color-danger); }
 
 .reason-item {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 12px 14px;
-    border: 1.5px solid #E2DFD8;
-    border-radius: 10px;
-    margin-bottom: 8px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-input);
+    margin-bottom: var(--space-2);
     cursor: pointer;
     transition: border-color 0.12s ease, background 0.12s ease;
 }
 
 .reason-item:hover {
-    border-color: #1E3A5F;
-    background: #EFEDE8;
+    border-color: var(--color-navy);
+    background: var(--color-bg);
 }
 
 .reason-item input[type="radio"] {
     appearance: none;
     width: 18px;
     height: 18px;
-    border: 2px solid #E2DFD8;
+    border: 2px solid var(--color-border);
     border-radius: 50%;
     flex-shrink: 0;
     cursor: pointer;
@@ -498,39 +569,35 @@ body {
 }
 
 .reason-item input[type="radio"]:checked {
-    border-color: #1E3A5F;
+    border-color: var(--color-navy);
     border-width: 5px;
 }
 
 .reason-item:has(input:checked) {
-    border-color: #1E3A5F;
-    background: #EFEDE8;
+    border-color: var(--color-navy);
+    background: var(--color-bg);
 }
 
 .reason-text {
     font-size: 0.9rem;
-    color: #1C1F1D;
-    font-family: 'Work Sans', sans-serif;
+    color: var(--color-ink);
+    font-family: var(--font-body);
 }
-
-/* ---------------------------------------------------------
-   Flag form actions
-   --------------------------------------------------------- */
 
 .flag-actions {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--space-2);
 }
 
 .btn-flag-submit {
     width: 100%;
     padding: 13px;
     border: none;
-    border-radius: 10px;
-    background: #B5482F;
+    border-radius: var(--radius-input);
+    background: var(--color-danger);
     color: #FFFFFF;
-    font-family: 'Work Sans', sans-serif;
+    font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
@@ -543,179 +610,18 @@ body {
     display: block;
     width: 100%;
     padding: 12px;
-    border: 1.5px solid #E2DFD8;
-    border-radius: 10px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-input);
     text-align: center;
     text-decoration: none;
-    color: #5C6360;
-    font-family: 'Work Sans', sans-serif;
+    color: var(--color-ink-soft);
+    font-family: var(--font-body);
     font-size: 0.9rem;
     font-weight: 500;
     transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 .btn-flag-cancel:hover {
-    border-color: #1C1F1D;
-    color: #1C1F1D;
-}
-
-/* ---------------------------------------------------------
-   Detail page additions — agent block & action buttons
-   --------------------------------------------------------- */
-
-.agent-eyebrow {
-    margin: 0 0 12px;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #5C6360;
-}
-
-.agent-identity {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-}
-
-.agent-avatar {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center;
-    border: 2px solid #E2DFD8;
-    display: block;
-}
-
-.agent-avatar-placeholder {
-    width: 48px;
-    height: 48px;
-    min-width: 48px;
-    border-radius: 50%;
-    background: #EFEDE8;
-    border: 2px solid #E2DFD8;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #5C6360;
-}
-
-.agent-name {
-    margin: 0 0 4px;
-    font-family: 'Bricolage Grotesque', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #1C1F1D;
-}
-
-.agent-rating-placeholder {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.stars {
-    color: #D99A3D;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-}
-
-.rating-label {
-    font-size: 0.75rem;
-    color: #5C6360;
-}
-
-/* Action buttons stacked in summary card */
-.action-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 16px;
-}
-
-.btn-enquire {
-    display: block;
-    width: 100%;
-    padding: 11px;
-    background: #1E3A5F;
-    color: #FFFFFF;
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.15s ease;
-}
-
-.btn-enquire:hover { background: #15293F; }
-
-.btn-inspect {
-    display: block;
-    width: 100%;
-    padding: 11px;
-    background: #2F5D55;
-    color: #FFFFFF;
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: background 0.15s ease;
-}
-
-.btn-inspect:hover { background: #254840; }
-
-.btn-pay {
-    display: block;
-    width: 100%;
-    padding: 11px;
-    background: #D99A3D;
-    color: #FFFFFF;
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Work Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    border-radius: 10px;
-    transition: background 0.15s ease;
-}
-
-.btn-pay:hover { background: #C4892E; }
-
-/* Flag report link */
-.flag-link {
-    padding-top: 12px;
-    border-top: 1px solid #E2DFD8;
-    text-align: center;
-}
-
-.flag-link a {
-    font-size: 0.8rem;
-    color: #5C6360;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: color 0.15s ease;
-}
-
-.flag-link a:hover { color: #B5482F; }
-
-/* ---------------------------------------------------------
-   Responsive & motion
-   --------------------------------------------------------- */
-
-@media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
+    border-color: var(--color-ink);
+    color: var(--color-ink);
 }

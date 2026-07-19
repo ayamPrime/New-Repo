@@ -12,7 +12,7 @@ class Listing(models.Model):
     property_type = models.CharField(max_length = 20, choices = PropertyType.choices)
     rooms_available = models.PositiveIntegerField(validators = [MinValueValidator(0)])
     rent_price = models.DecimalField(max_digits = 10, decimal_places = 2, validators = [MinValueValidator(1000)])
-    agent = models.ForeignKey(
+    lister = models.ForeignKey(
         'accounts.CustomUser',
         on_delete = models.CASCADE,
         related_name = 'listings',

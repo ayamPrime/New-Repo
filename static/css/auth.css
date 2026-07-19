@@ -1,43 +1,20 @@
 /* =========================================================
    El Vanta — Auth Pages (Login + Multi-step Signup)
+   ---------------------------------------------------------
+   Depends on base.css for: CSS variables, font import,
+   box-sizing reset, body base styles, reduced-motion global.
+
+   NOTE: --color-navy-hover, --color-danger, --color-success,
+   and --radius-input now live in base.css — add them there
+   if you haven't yet.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
-:root {
-    --color-bg:          #EFEDE8;
-    --color-surface:     #FFFFFF;
-    --color-ink:         #1C1F1D;
-    --color-ink-soft:    #5C6360;
-    --color-border:      #E2DFD8;
-    --color-accent:      #D99A3D;
-    --color-navy:        #1E3A5F;
-    --color-navy-hover:  #15293F;
-    --color-danger:      #B5482F;
-    --color-success:     #2F5D55;
-
-    --font-display: 'Bricolage Grotesque', sans-serif;
-    --font-body:    'Work Sans', sans-serif;
-    --font-mono:    'IBM Plex Mono', monospace;
-
-    --radius-card:  20px;
-    --radius-input: 10px;
-    --space-2: 8px;
-    --space-3: 16px;
-    --space-4: 24px;
-    --space-5: 40px;
-}
-
-* { box-sizing: border-box; }
-
 body {
-    margin: 0;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--space-4) var(--space-3);
-    font-family: var(--font-body);
     background: url("../images/background.jpg") center / cover no-repeat;
     background-color: #1C1F1D;
 }
@@ -57,7 +34,7 @@ body::before {
     width: 100%;
     max-width: 440px;
     background: var(--color-surface);
-    border-radius: var(--radius-card);
+    border-radius: var(--radius-card-lg);
     padding: var(--space-5) var(--space-4);
     box-shadow:
         0 2px 4px rgba(0,0,0,0.12),
@@ -319,8 +296,4 @@ span.required { color: var(--color-danger); }
 @media (max-width: 480px) {
     .form-space { padding: var(--space-4) var(--space-3); }
     .form_options { grid-template-columns: 1fr; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; }
 }

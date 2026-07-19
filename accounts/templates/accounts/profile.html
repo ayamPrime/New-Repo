@@ -56,8 +56,8 @@
             {% endif %}
         </div>
 
-        <!-- Agent listings -->
-        {% if user.account_type == 'agent' %}
+        <!-- Listers listings -->
+        {% if user.account_type == 'lister' %}
         <div class="profile-listings">
             <h3>My Listings</h3>
             {% for listing in user.listings.all %}
@@ -87,7 +87,7 @@
         {% endif %}
 
         <!-- Reports on my listings (landlords only) -->
-        {% if user.account_type == 'agent' %}
+        {% if user.account_type == 'lister' %}
         <div class="profile-reports">
             <h3>Reports on My Listings</h3>
             {% for listing in user.listings.all %}
@@ -109,7 +109,7 @@
         {% endif %}
 
         <!-- Reports filed by this user (tenants) -->
-        {% if user.account_type == 'student' %}
+        {% if user.account_type == 'seeker' %}
         <div class="profile-reports">
             <h3>Reports I've Filed</h3>
             {% for flag in user.flags_made.all %}

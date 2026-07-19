@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --color-bg:          #EFEDE8;
+    --color-surface:     #FFFFFF;
+    --color-ink:         #1C1F1D;
+    --color-ink-soft:    #5C6360;
+    --color-border:      #E2DFD8;
+    --color-accent:      #D99A3D;
+    --color-accent-soft: #F6E6CC;
+    --color-navy:        #1E3A5F;
+    --color-navy-hover:  #15293F;
+    --color-danger:      #B5482F;
+    --color-danger-bg:   #FEF2F0; 
+    --color-danger-hover:#9A3D27;
+    --color-success:     #2F5D55;
+    --color-success-soft:#E3ECE9;
+    --color-agent:       #8A5A1C;
+
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body:    'Work Sans', sans-serif;
+    --font-mono:    'IBM Plex Mono', monospace;
+
+    --radius-card: 16px;
+    --radius-card-lg: 20px;
+    --radius-input: 10px;
+    --radius-pill: 999px;
+    --radius-sm: 8px;
+    --space-2: 8px;
+    --space-3: 16px;
+    --space-4: 24px;
+    --space-5: 40px;
+    --space-6: 64px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    line-height: 1.5;
+}
+
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-3);
+    border-top: 1px solid var(--color-border);
+}
+
+.site-footer p {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+}
+
+.messages { list-style: none; margin: 0; padding: 0; }
+.messages .success {
+    background: var(--color-success);
+    color: #FFFFFF;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.messages .danger {
+    background: var(--color-danger);
+    color: #FFFFFF;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; transform: none !important; }
+}

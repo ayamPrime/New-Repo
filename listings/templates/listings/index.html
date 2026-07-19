@@ -10,7 +10,7 @@
 
 {% block content %}
 <header class="top-bar">
-    <div id="header"><h1>Accommodations Hub</h1></div>
+    <div id="header"><h1>VaseCrib</h1></div>
     <div class="search-box">
         <input type="text" placeholder="Search listings...">
         <button type="button" aria-label="Search"><i class="fas fa-search"></i></button>
@@ -19,8 +19,8 @@
 
 <section class="hero">
     <div class="hero-content">
-        <h1>Find your home near OOU</h1>
-        <p>Verified rooms and apartments, just minutes from campus.</p>
+        <h1>Find your new home</h1>
+        <p>Verified rooms and apartments</p>
         <a href="{% url 'listings'%}" class="btn-browse">Browse Listings</a>
     </div>
 </section>
@@ -54,6 +54,48 @@
 </section>
 
 <footer class="site-footer">
-    <p>© 2026 EL-VANTA. All Rights Reserved.</p>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>VaseCrib</h3>
+      <p>Finding accommodations made easy</p>
+      <div class="footer-social">
+        <a href="https://x.com/elvanta" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://instagram.com/elvanta" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>For Students</h4>
+      <a href="{% url 'listings' %}">Browse Listings</a>
+      <a href="#">How It Works</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>For Listers</h4>
+      <a href="#">List Your Property</a>
+      <a href="{% url 'legal_document' 'lister-onboarding' %}">Lister Agreement</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="{% url 'legal_document' 'terms' %}">Terms of Service</a>
+      <a href="{% url 'legal_document' 'privacy' %}">Privacy Policy</a>
+      <a href="{% url 'legal_document' 'escrow-refund' %}">Escrow &amp; Refund Policy</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {% now "Y" %} VaseCrib. All rights reserved.</p>
+  </div>
 </footer>
 {% endblock %}
