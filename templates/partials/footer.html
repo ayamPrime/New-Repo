@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>For Students</h4>
+      <a href="{% url 'listings' %}">Browse Listings</a>
+      <a href="#">How It Works</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>For Listers</h4>
+      <a href="#">List Your Property</a>
+      <a href="{% url 'legal_document' 'lister-onboarding' %}">Lister Agreement</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="{% url 'legal_document' 'terms' %}">Terms of Service</a>
+      <a href="{% url 'legal_document' 'privacy' %}">Privacy Policy</a>
+      <a href="{% url 'legal_document' 'escrow-refund' %}">Escrow &amp; Refund Policy</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {% now "Y" %} VaseCrib. All rights reserved.</p>
+  </div>
+</footer>

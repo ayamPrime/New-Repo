@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.text import slugify
 from .forms import ListingForm, LocationForm, AmenitiesForm, ListingImageForm, ListingVideoForm, ListingFlagForm
 from .models import Listing, ListingFlag
 
@@ -12,7 +14,10 @@ def home_page(request):
 
 def listings_page(request):
     listings = Listing.objects.all()
-    return render(request, 'listings/listings.html', {'listings': listings})
+    query = request.GET.get('q', '').strip()
+    if query:
+        listings = listings.filter(property_type__icontains=slugify(query))
+    return render(request, 'listings/listings.html', {'listings': listings, 'query': query})
 
 @login_required
 def add_listings(request):

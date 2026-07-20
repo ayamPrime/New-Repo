@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block header %}{% endblock %}
 {% block content %}
 <h1>{{ object.title }}</h1>
 <p><small>Version {{ object.version }} — last updated {{ object.updated_at|date:"F j, Y" }}</small></p>

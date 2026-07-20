@@ -5,6 +5,9 @@ class ListingForm(forms.ModelForm):
     class Meta:
         model = Listing
         fields = ['listing_title', 'property_type', 'rooms_available', 'rent_price']
+        widgets = {
+            'listing_title': forms.TextInput(attrs={'placeholder': 'e.g. 3 Bedroom Self-Contain at Oru'}),
+        }
 
 class LocationForm(forms.ModelForm):
     class Meta:

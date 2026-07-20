@@ -5,11 +5,13 @@ from django.core.validators import MinValueValidator
 class Listing(models.Model):
     listing_title = models.CharField(max_length = 100)
     class PropertyType(models.TextChoices):
-        SELF_CONTAIN = 'self-contain'
-        SINGLE_ROOM = 'single room'
-        SHARED_ROOM = 'shared room'
-        SHARED_APARTMENT = 'shared apartment'
-    property_type = models.CharField(max_length = 20, choices = PropertyType.choices)
+        SELF_CONTAIN = 'self-contain', 'Self Contain'
+        SINGLE_ROOM = 'single-room', 'Single Room'
+        SHARED_ROOM = 'shared-room', 'Shared Room'
+        SHARED_APARTMENT = 'shared-apartment', 'Shared Apartment'
+        TWO_BEDROOM = '2-bedroom', '2 Bedroom'
+        THREE_BEDROOM = '3-bedroom', '3 Bedroom'
+    property_type = models.CharField(max_length = 30, choices = PropertyType.choices)
     rooms_available = models.PositiveIntegerField(validators = [MinValueValidator(0)])
     rent_price = models.DecimalField(max_digits = 10, decimal_places = 2, validators = [MinValueValidator(1000)])
     lister = models.ForeignKey(

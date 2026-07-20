@@ -1,0 +1,12 @@
+<header class="top-bar">
+    <div id="header"><h1>VaseCrib</h1></div>
+    <form class="search-box" method="get" action="{% url 'listings' %}">
+        <input
+            type="text"
+            name="q"
+            value="{{ query|default:'' }}"
+            placeholder="e.g. 3 Bedroom, Self-Contain"
+        >
+        <button type="submit" aria-label="Search"><i class="fas fa-search"></i></button>
+    </form>
+</header>
