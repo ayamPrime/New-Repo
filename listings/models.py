@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, FileExtensionValidator
 
 # Create your models here.
 class Listing(models.Model):
@@ -70,7 +70,11 @@ class ListingVideo(models.Model):
         on_delete=models.CASCADE,
         related_name='video'
     )
-    video = models.FileField(upload_to='listings/videos/', blank=True)
+    video = models.FileField(
+        upload_to='listings/videos/',
+        blank=True,
+        validators=[FileExtensionValidator(allowed_extensions=['mp4', 'mov', 'webm'])],
+    )
 
     def __str__(self):
         return f"Video for {self.listing.listing_title}"

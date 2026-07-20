@@ -135,6 +135,13 @@ body {
     color: var(--color-ink-soft);
 }
 
+.upload-error {
+    margin: 4px 0 0;
+    font-size: 0.8rem;
+    color: var(--color-danger);
+    min-height: 1em;
+}
+
 .messages { list-style: none; margin: 0; padding: 0; }
 .messages .success {
     background: var(--color-success);

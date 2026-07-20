@@ -4,8 +4,8 @@ from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.text import slugify
-from .forms import ListingForm, LocationForm, AmenitiesForm, ListingImageForm, ListingVideoForm, ListingFlagForm
-from .models import Listing, ListingFlag
+from .forms import ListingForm, LocationForm, AmenitiesForm, ListingImagesForm, ListingVideoForm, ListingFlagForm
+from .models import Listing, ListingFlag, ListingImage
 
 # Create your views here.
 def home_page(request):
@@ -28,42 +28,51 @@ def add_listings(request):
         form = ListingForm(request.POST, request.FILES)
         form1 = LocationForm(request.POST)
         form2 = AmenitiesForm(request.POST)
-        form3 = ListingImageForm(request.POST, request.FILES)
+        images_form = ListingImagesForm(request.POST, request.FILES)
         form4 = ListingVideoForm(request.POST, request.FILES)
-        if form.is_valid() and form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
-                listing = form.save(commit=False)
-                listing.agent = request.user
-                listing.save()
 
-                location = form1.save(commit=False)
-                location.listing = listing
-                location.save()
+        forms_valid = [
+            form.is_valid(),
+            form1.is_valid(),
+            form2.is_valid(),
+            images_form.is_valid(),
+            form4.is_valid(),
+        ]
 
-                amenities = form2.save(commit=False)
-                amenities.listing = listing
-                amenities.save()
+        if all(forms_valid):
+            listing = form.save(commit=False)
+            listing.lister = request.user
+            listing.save()
 
-                image = form3.save(commit=False)
-                image.listing = listing
-                image.save()
+            location = form1.save(commit=False)
+            location.listing = listing
+            location.save()
 
+            amenities = form2.save(commit=False)
+            amenities.listing = listing
+            amenities.save()
+
+            for img in images_form.cleaned_data['images']:
+                ListingImage.objects.create(listing=listing, image=img)
+
+            if request.FILES.get('video'):
                 video = form4.save(commit=False)
                 video.listing = listing
-                if request.FILES.get('video'):
-                    video.save()
+                video.save()
 
-                return redirect('profile')
+            return redirect('profile')
     else:
         form = ListingForm()
         form1 = LocationForm()
         form2 = AmenitiesForm()
-        form3 = ListingImageForm()
+        images_form = ListingImagesForm()
         form4 = ListingVideoForm()
+
     return render(request, 'listings/add_listings.html', {
         'listing_form': form,
         'location_form': form1,
         'amenities_form': form2,
-        'image_form': form3,
+        'images_form': images_form,
         'video_form': form4,
     })
 

@@ -148,15 +148,15 @@
             <div class="media-fields">
 
                 <div class="field">
-                    <p class="field-label">Photo <span class="required">*</span></p>
-                    <label class="upload-area" for="{{ image_form.image.id_for_label }}">
-                        {{ image_form.image }}
+                    <p class="field-label">Photos <span class="required">*</span></p>
+                    <label class="upload-area" for="{{ images_form.images.id_for_label }}">
+                        {{ images_form.images }}
                         <i class="fas fa-images upload-icon"></i>
-                        <p><strong>Click to upload a photo</strong></p>
+                        <p><strong>Click to upload photos</strong></p>
                         <p>or drag and drop here</p>
                     </label>
-                    {{ image_form.image.errors }}
-                    <p class="upload-hint">JPG, PNG, WEBP accepted.</p>
+                    {{ images_form.images.errors }}
+                    <p class="upload-hint">JPG, PNG, WEBP accepted. Select multiple at once.</p>
                 </div>
 
                 <div class="field">
@@ -168,7 +168,7 @@
                         <p>or drag and drop here</p>
                     </label>
                     {{ video_form.video.errors }}
-                    <p class="upload-hint">MP4 recommended. Max 100MB.</p>
+                    <p class="upload-hint">MP4, MOV, or WEBM. Max 100MB.</p>
                 </div>
 
             </div>
