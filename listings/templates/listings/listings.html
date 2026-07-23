@@ -14,9 +14,9 @@
         <p>Browse verified rooms and apartments around Ago-Iwoye.</p>
     </header>
 
-    <div class="listings-grid" data-reveal>
+    <div class="listings-grid" data-reveal="stagger">
         {% for listing in listings %}
-        <article class="listing-card">
+        <article class="listing-card" data-reveal-child>
             <div class="listing-image">
                 {% if listing.images.first %}
                     <img

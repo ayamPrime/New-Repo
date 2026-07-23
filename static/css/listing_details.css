@@ -37,6 +37,7 @@
 
 .media-section {
     margin-bottom: var(--space-4);
+    transition: opacity 0.5s var(--transition-slow), transform 0.5s var(--transition-slow);
 }
 
 .image-gallery {
@@ -120,10 +121,7 @@
     box-shadow:
         0 1px 2px rgba(26,26,26,0.04),
         0 4px 12px rgba(26,26,26,0.05);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    opacity: 0;
-    transform: translateY(16px);
-    animation: panel-rise 0.5s var(--transition-slow) forwards;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity 0.5s var(--transition-slow), transform 0.5s var(--transition-slow);
 }
 
 .detail-panel.is-hover {
@@ -135,11 +133,6 @@
 
 .detail-panel + .detail-panel {
     margin-top: var(--space-4);
-}
-
-@keyframes panel-rise {
-    0% { opacity: 0; transform: translateY(16px); }
-    100% { opacity: 1; transform: translateY(0); }
 }
 
 .panel-heading {
@@ -249,7 +242,7 @@
     box-shadow:
         0 1px 2px rgba(26,26,26,0.04),
         0 4px 12px rgba(26,26,26,0.05);
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity 0.5s var(--transition-slow), transform 0.5s var(--transition-slow);
 }
 
 .summary-card.is-hover {
@@ -468,10 +461,6 @@
 
 .flag-link a:hover { color: var(--color-danger); }
 
-.flag-card {
-    animation: card-enter 0.45s var(--transition-slow) both;
-}
-
 /* ---------------------------------------------------------
    Flag / Report listing page
    --------------------------------------------------------- */
@@ -490,6 +479,14 @@
     box-shadow:
         0 1px 2px rgba(28,31,29,0.04),
         0 8px 24px rgba(28,31,29,0.07);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity 0.5s var(--transition-slow), transform 0.5s var(--transition-slow);
+}
+
+.flag-card.is-hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 6px 12px rgba(28,31,29,0.05),
+        0 14px 32px rgba(28,31,29,0.10);
 }
 
 .flag-header {

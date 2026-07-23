@@ -1,41 +1,25 @@
 <footer class="site-footer">
-  <div class="footer-top">
-    <div class="footer-brand">
-      <a href="{% url 'home' %}" class="footer-wordmark" aria-label="VaseCrib home">
-        <span class="footer-mark" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 9.5L12 3l9 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M5 10.5v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M10 21.5v-6a2 2 0 0 1 4 0v6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="footer-name">VaseCrib</span>
-      </a>
-      <p class="footer-tagline">Verified student homes near OOU.</p>
-    </div>
-
-    <div class="footer-divider" aria-hidden="true"></div>
-
+  <div class="footer-top" data-reveal="stagger">
     <div class="footer-cols">
-      <div class="footer-col">
+      <div class="footer-col" data-reveal-child>
         <h4>Company</h4>
         <a href="#">About Us</a>
         <a href="#">Contact</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col" data-reveal-child>
         <h4>For Students</h4>
         <a href="{% url 'listings' %}">Browse Listings</a>
         <a href="#">How It Works</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col" data-reveal-child>
         <h4>For Listers</h4>
         <a href="#">List Your Property</a>
         <a href="{% url 'legal_document' 'lister-onboarding' %}">Lister Agreement</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col" data-reveal-child>
         <h4>Legal</h4>
         <a href="{% url 'legal_document' 'terms' %}">Terms of Service</a>
         <a href="{% url 'legal_document' 'privacy' %}">Privacy Policy</a>
@@ -44,7 +28,7 @@
     </div>
   </div>
 
-  <div class="footer-bottom">
+  <div class="footer-bottom" data-reveal>
     <p>&copy; {% now "Y" %} VaseCrib. All rights reserved.</p>
   </div>
 </footer>

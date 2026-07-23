@@ -8,19 +8,19 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<section class="hero" data-reveal>
+<section class="hero" data-reveal="stagger">
     <div class="hero-content">
-        <h1>Find your new home</h1>
-        <p>Verified rooms and apartments</p>
-        <a href="{% url 'listings' %}" class="btn-browse">Browse Listings</a>
+        <h1 data-reveal-child>Find your new home</h1>
+        <p data-reveal-child>Verified rooms and apartments</p>
+        <a href="{% url 'listings' %}" class="btn-browse" data-reveal-child>Browse Listings</a>
     </div>
 </section>
 
-<section class="recent-listings" data-reveal>
+<section class="recent-listings">
     <h2>Recent Listings</h2>
-   <div class="listings-grid">
+   <div class="listings-grid" data-reveal="stagger">
         {% for listing in listings %}
-        <article class="listing-card">
+        <article class="listing-card" data-reveal-child>
             <div class="listing-image">
                 {% if listing.images.first %}
                     <img
@@ -39,8 +39,8 @@
             </div>
         </article>
         {% empty %}
-        <div class="empty-listings">
-            <div class="empty-listings-icon" aria-hidden="true"><i class="fas fa-house"></i></div>
+        <div class="empty-listings" data-reveal-child>
+            <div class="empty-listings-icon" aria-hidden="true" data-icon-pop><i class="fas fa-house"></i></div>
             <div>
                 <h3>Be the first to list a space on VaseCrib.</h3>
                 <p>Help someone find their next room, apartment, or home.</p>

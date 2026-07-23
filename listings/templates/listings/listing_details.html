@@ -11,12 +11,12 @@
 {% block content %}
 <div class="detail-page">
 
-    <a href="{% url 'home' %}" class="back-link">
+    <a href="{% url 'home' %}" class="back-link" data-reveal>
         <i class="fas fa-arrow-left"></i> Back to Listings
     </a>
 
     <!-- ── Media ───────────────────────────────────────── -->
-    <div class="media-section">
+    <div class="media-section" data-reveal>
 
         <!-- Images: loops over all uploaded images for this listing -->
         {% if listing.images.all %}
@@ -54,7 +54,7 @@
         <div class="detail-main">
 
             <!-- Title + Type -->
-            <div class="detail-panel">
+            <div class="detail-panel" data-reveal>
                 <div class="listing-title-block">
                     <h1>{{ listing.listing_title }}</h1>
                     <span class="type-badge">{{ listing.get_property_type_display }}</span>
@@ -62,7 +62,7 @@
             </div>
 
             <!-- Location -->
-            <div class="detail-panel">
+            <div class="detail-panel" data-reveal>
                 <h2 class="panel-heading">Location</h2>
 
                 <div class="location-row">
@@ -83,55 +83,55 @@
             </div>
 
             <!-- Amenities — only shows the ones that are True -->
-            <div class="detail-panel">
+            <div class="detail-panel" data-reveal>
                 <h2 class="panel-heading">Amenities</h2>
-                <div class="amenities-display">
+                <div class="amenities-display" data-reveal="stagger">
 
                     {% if listing.amenities.has_water %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-tint"></i> Running Water
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-tint" data-icon-pop></i> Running Water
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_electricity %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-bolt"></i> Electricity
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-bolt" data-icon-pop></i> Electricity
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_security %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-shield-alt"></i> Security
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-shield-alt" data-icon-pop></i> Security
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_bathroom %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-bath"></i> Private Bathroom
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-bath" data-icon-pop></i> Private Bathroom
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_kitchen %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-utensils"></i> Kitchen Access
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-utensils" data-icon-pop></i> Kitchen Access
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_parking %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-car"></i> Parking Space
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-car" data-icon-pop></i> Parking Space
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_fence %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-border-all"></i> Fenced Compound
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-border-all" data-icon-pop></i> Fenced Compound
                         </span>
                     {% endif %}
 
                     {% if listing.amenities.has_prepaid %}
-                        <span class="amenity-tag">
-                            <i class="fas fa-plug"></i> Prepaid Meter
+                        <span class="amenity-tag" data-reveal-child>
+                            <i class="fas fa-plug" data-icon-pop></i> Prepaid Meter
                         </span>
                     {% endif %}
 
@@ -146,7 +146,7 @@
         </div>
 
         <!-- RIGHT COLUMN: summary card -->
-        <aside class="summary-card">
+        <aside class="summary-card" data-reveal>
 
             <div class="price-display">
                 <span class="price-amount">₦{{ listing.rent_price }}</span>
