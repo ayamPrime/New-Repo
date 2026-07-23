@@ -1,12 +1,6 @@
 /* =========================================================
    El Vanta — HomePage & Listings Page
    ---------------------------------------------------------
-   Targets the classes and IDs in index.html exactly.
-   A responsive grid of property cards. Each card has a
-   placeholder image area with a price tag overlaid in the
-   corner — swap the gradient for {{ listing.image.url }}
-   once the backend exists.
-
    Depends on base.css for: CSS variables, font import,
    box-sizing reset, body styles, and the reduced-motion
    global override.
@@ -46,16 +40,15 @@
 .brand-icon {
     width: 29px;
     height: 29px;
-    color: var(--color-accent);
+    color: var(--color-primary);
 }
 
 #header h1 {
     margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     color: var(--color-ink);
     white-space: nowrap;
 }
@@ -87,7 +80,7 @@
 }
 
 .search-box input:focus {
-    border-color: var(--color-accent);
+    border-color: var(--color-primary);
     background: var(--color-surface);
 }
 
@@ -95,15 +88,19 @@
     border: 1.5px solid var(--color-border);
     border-left: none;
     border-radius: 0 999px 999px 0;
-    background: var(--color-ink);
+    background: var(--color-secondary);
     color: #FFFFFF;
     padding: 0 18px;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background var(--transition-fast), transform 0.1s ease;
 }
 
 .search-box button:hover {
-    background: var(--color-navy);
+    background: var(--color-primary);
+}
+
+.search-box button:active {
+    transform: scale(0.98);
 }
 
 /* ---------------------------------------------------------
@@ -116,12 +113,11 @@
     text-align: center;
     overflow: hidden;
     background:
-        linear-gradient(115deg, rgba(30, 58, 95, 0.97), rgba(47, 93, 85, 0.89)),
-        radial-gradient(circle at 80% 20%, rgba(217, 154, 61, 0.8), transparent 35%),
-        #1E3A5F;
+        linear-gradient(115deg, rgba(15, 92, 86, 0.95), rgba(26, 26, 26, 0.92)),
+        radial-gradient(circle at 80% 20%, rgba(217, 142, 74, 0.55), transparent 35%),
+        var(--color-primary);
 }
 
-/* Decorative dashed ring — pure CSS, no extra HTML */
 .hero::before {
     content: '';
     position: absolute;
@@ -129,10 +125,19 @@
     right: -80px;
     width: 340px;
     height: 340px;
-    border: 2px dashed rgba(28, 31, 29, 0.08);
+    border: 2px dashed rgba(255, 255, 255, 0.10);
     border-radius: 50%;
     transform: translateY(-50%);
     pointer-events: none;
+}
+
+.hero-content {
+    animation: hero-fade-in 0.7s var(--transition-slow) both;
+}
+
+@keyframes hero-fade-in {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .hero-content {
@@ -141,7 +146,6 @@
     margin: 0 auto;
 }
 
-/* eyebrow line above the h1 */
 .hero-content::before {
     content: 'ROOMS · APARTMENTS · HOMES';
     display: block;
@@ -149,7 +153,7 @@
     font-size: 0.7rem;
     font-weight: 500;
     letter-spacing: 0.2em;
-    color: var(--color-ink-soft);
+    color: rgba(255, 255, 255, 0.70);
     margin-bottom: var(--space-3);
 }
 
@@ -174,6 +178,8 @@
 }
 
 .btn-browse {
+    position: relative;
+    overflow: hidden;
     display: inline-block;
     background: var(--color-accent);
     color: #FFFFFF;
@@ -183,16 +189,21 @@
     padding: 13px 32px;
     border-radius: 999px;
     letter-spacing: 0.02em;
-    transition: background 0.15s ease, transform 0.1s ease;
+    transition: background var(--transition-fast), transform 0.1s ease, box-shadow var(--transition-fast);
 }
 
 .btn-browse:hover {
-    background: #EAB05B;
-    transform: translateY(-1px);
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(217, 142, 74, 0.28);
+}
+
+.btn-browse:active {
+    transform: translateY(0);
 }
 
 .btn-browse:focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-accent);
     outline-offset: 3px;
 }
 
@@ -252,12 +263,9 @@
 .recent-listings h2::after {
     content: "";
     display: block;
-
     width: 70px;
     height: 3px;
-
     margin: var(--space-2) auto 0;
-
     background: var(--color-accent);
     border-radius: 999px;
 }
@@ -308,7 +316,7 @@
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    color: var(--color-navy);
+    color: var(--color-primary);
     background: var(--color-success-soft);
     font-size: 1.2rem;
 }
@@ -366,30 +374,43 @@
     display: flex;
     flex-direction: column;
     box-shadow:
-        0 1px 2px rgba(28, 31, 29, 0.04),
-        0 8px 24px rgba(28, 31, 29, 0.06);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+        0 1px 2px rgba(26, 26, 26, 0.04),
+        0 8px 24px rgba(26, 26, 26, 0.06);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    opacity: 0;
+    transform: translateY(18px);
+    animation: card-slide-up 0.5s var(--transition-slow) forwards;
+}
+
+.listing-card.is-visible,
+.listing-card {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .listing-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow:
-        0 4px 8px rgba(28, 31, 29, 0.06),
-        0 12px 28px rgba(28, 31, 29, 0.08);
+        0 6px 12px rgba(26, 26, 26, 0.06),
+        0 14px 32px rgba(26, 26, 26, 0.10);
 }
 
-/* Placeholder image area — replace background with a real photo later */
 .listing-image {
     position: relative;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(135deg, #DCE6E2, #C9D6D1);
+    background: linear-gradient(135deg, #E2DCD0, #CFC7BA);
+}
+
+@keyframes card-slide-up {
+    0% { opacity: 0; transform: translateY(18px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
 .listing-price {
     position: absolute;
     top: 12px;
     right: 12px;
-    background: var(--color-ink);
+    background: var(--color-secondary);
     color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.8rem;
@@ -426,7 +447,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     background: var(--color-accent-soft);
-    color: #8A5A1C;
+    color: var(--color-agent);
     padding: 3px 10px;
     border-radius: 999px;
 }
@@ -436,17 +457,19 @@
     align-self: flex-start;
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--color-ink);
+    color: var(--color-primary);
     text-decoration: none;
     border-bottom: 2px solid var(--color-accent);
+    transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
 .listing-link:hover {
     color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 .listing-link:focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
 

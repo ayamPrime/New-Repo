@@ -6,22 +6,20 @@
    reduce the sense of length on a long form.
    ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
-
 :root {
-    --color-bg: #EFEDE8;
+    --color-bg: #F7F3EC;
     --color-surface: #FFFFFF;
-    --color-ink: #1C1F1D;
-    --color-ink-soft: #5C6360;
-    --color-border: #E2DFD8;
-    --color-accent: #D99A3D;
+    --color-ink: #1A1A1A;
+    --color-ink-soft: #6B655D;
+    --color-border: #E2DCD0;
+    --color-accent: #D98E4A;
     --color-accent-soft: #F6E6CC;
-    --color-focus: #1E3A5F;
+    --color-focus: #0F5C56;
     --color-danger: #B5482F;
 
-    --font-display: 'Bricolage Grotesque', sans-serif;
-    --font-body: 'Work Sans', sans-serif;
-    --font-mono: 'IBM Plex Mono', monospace;
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'Inter', sans-serif;
 
     --radius-card: 16px;
     --radius-input: 10px;
@@ -108,7 +106,7 @@ body {
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background: var(--color-ink);
+    background: var(--color-primary);
     color: #FFFFFF;
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -191,6 +189,7 @@ body {
 .field textarea:focus {
     border-color: var(--color-focus);
     background: var(--color-surface);
+    box-shadow: 0 0 0 3px rgba(15, 92, 86, 0.12);
 }
 
 .field textarea {
@@ -248,8 +247,8 @@ body {
 }
 
 .amenity-item input[type="checkbox"]:checked {
-    background: var(--color-ink);
-    border-color: var(--color-ink);
+    background: var(--color-primary);
+    border-color: var(--color-primary);
 }
 
 .amenity-item input[type="checkbox"]:checked::after {
@@ -289,8 +288,8 @@ body {
 }
 
 .upload-area:hover {
-    border-color: var(--color-accent);
-    background: var(--color-accent-soft);
+    border-color: var(--color-primary);
+    background: var(--color-success-soft);
 }
 
 .upload-area input[type="file"] {
@@ -336,25 +335,31 @@ body {
 }
 
 .btn-submit {
+    position: relative;
+    overflow: hidden;
     width: 100%;
     padding: 14px;
     border: none;
     border-radius: var(--radius-input);
-    background: var(--color-ink);
+    background: var(--color-primary);
     color: #FFFFFF;
     font-family: var(--font-body);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.15s ease;
+    transition: background var(--transition-fast), transform 0.1s ease, box-shadow var(--transition-fast);
 }
 
 .btn-submit:hover {
     background: var(--color-focus);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 92, 86, 0.18);
 }
 
+.btn-submit:active { transform: translateY(0); }
+
 .btn-submit:focus-visible {
-    outline: 2px solid var(--color-ink);
+    outline: 2px solid var(--color-primary);
     outline-offset: 2px;
 }
 
@@ -372,13 +377,15 @@ body {
     text-align: center;
     text-decoration: none;
     display: block;
-    transition: border-color 0.15s ease, color 0.15s ease;
+    transition: border-color var(--transition-fast), color var(--transition-fast), transform 0.1s ease;
 }
 
 .btn-cancel:hover {
-    border-color: var(--color-ink);
-    color: var(--color-ink);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
 }
+.btn-cancel:active { transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
     * {
