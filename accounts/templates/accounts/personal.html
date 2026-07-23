@@ -19,13 +19,14 @@
             <div class="step-line"></div>
             <div class="step-dot">4</div>
         </div>
+        <p class="step-progress" aria-label="Signup progress">Step 1 of 4</p>
 
         <header id="form_header">
             <h1>ACCOMMODATIONS HUB</h1>
             <h3>Personal Info</h3>
         </header>
 
-        <form action="" method="POST">
+        <form action="" method="POST" novalidate data-signup-step="1">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
@@ -62,7 +63,7 @@
             </div>
 
             <div class="buttons">
-                <button type="submit">Continue</button>
+                <button type="submit" class="signup-submit">Continue</button>
             </div>
         </form>
 

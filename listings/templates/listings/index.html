@@ -39,7 +39,14 @@
             </div>
         </article>
         {% empty %}
-        <p style="color: var(--color-ink-soft);">No listings yet. Check back soon.</p>
+        <div class="empty-listings">
+            <div class="empty-listings-icon" aria-hidden="true"><i class="fas fa-house"></i></div>
+            <div>
+                <h3>Be the first to list a space on VaseCrib.</h3>
+                <p>Help someone find their next room, apartment, or home.</p>
+            </div>
+            <a href="{% url 'create_listings' %}" class="btn-browse empty-listings-cta">List a space</a>
+        </div>
         {% endfor %}
     </div>
 </section>

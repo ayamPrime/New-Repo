@@ -1,0 +1,1 @@
+- [Imported dependency files](requirements-encoding.md) — imported Python requirement files may arrive as UTF-16; normalize before using package-manager workflows.

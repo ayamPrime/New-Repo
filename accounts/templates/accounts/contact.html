@@ -18,13 +18,14 @@
             <div class="step-line"></div>
             <div class="step-dot">4</div>
         </div>
+        <p class="step-progress" aria-label="Signup progress">Step 3 of 4</p>
 
         <header id="form_header">
             <h1>ACCOMMODATIONS HUB</h1>
             <h3>Contact Info</h3>
         </header>
 
-        <form action="" method="POST">
+        <form action="" method="POST" novalidate data-signup-step="3">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
@@ -47,12 +48,12 @@
             </div>
 
             <div class="buttons">
-                <button type="submit">Continue</button>
+                <button type="submit" class="signup-submit">Continue</button>
             </div>
         </form>
 
         <div class="form_options single">
-            <p><a href="{% url 'signup_step2' %}">← Back to Step 2</a></p>
+            <p><a class="back-button" href="{% url 'signup_step2' %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> Back to Step 2</a></p>
         </div>
 
     </div>
