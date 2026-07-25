@@ -76,9 +76,7 @@ body {
 .footer-col {
     padding-top: 16px;
     border-top: 1px solid var(--color-border);
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.4s var(--transition-slow), transform 0.4s var(--transition-slow);
+    /* opacity/transform/transition owned by [data-reveal-child] rules */
 }
 
 .footer-col h4 {
@@ -226,7 +224,6 @@ body {
     transition: opacity 0.5s var(--transition-slow), transform 0.5s var(--transition-slow);
 }
 
-[data-reveal="stagger"].is-visible [data-reveal-child],
 [data-reveal-child].is-visible {
     opacity: 1;
     transform: translateY(0);
