@@ -146,15 +146,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Where collectstatic copies files for production (used by WhiteNoise)
+# Where collectstatic copies files (optional on Vercel — WhiteNoise uses finders)
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-# Serve compressed, cache-busted static files via WhiteNoise in production
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Serve compressed static files via WhiteNoise.
+# USE_FINDERS=True lets WhiteNoise locate files from STATICFILES_DIRS directly
+# without requiring collectstatic to have run first (needed for Vercel).
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+WHITENOISE_USE_FINDERS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
