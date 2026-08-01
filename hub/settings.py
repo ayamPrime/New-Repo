@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'accounts',
     'listings',
+    'legal',
 ]
 
 # Modelling
