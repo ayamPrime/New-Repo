@@ -15,7 +15,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: var(--space-4) var(--space-3);
-    background: url("../images/background.jpg") center / cover no-repeat;
+    background: url("https://res.cloudinary.com/u3zuv6xh/image/upload/v1784757241/background_xvulol.jpg") center / cover no-repeat;
     background-color: #1C1F1D;
 }
 
