@@ -1,5 +1,5 @@
-/* =========================================================
-   El Vanta — Navigation Drawer
+﻿/* =========================================================
+   El Vanta â€” Navigation Drawer
    ---------------------------------------------------------
    Hamburger button (top-left, fixed) toggles a blue drawer
    that slides in from the left. Logout sits pinned to the
@@ -10,7 +10,7 @@
    is included in base.html.
 
    NOTE: --radius-sm now lives in base.css. The .messages
-   flash-message styling moved to base.css — it's a global
+   flash-message styling moved to base.css â€” it's a global
    concern, not nav-specific.
    ========================================================= */
 
@@ -156,3 +156,4 @@
         transition: none;
     }
 }
+
