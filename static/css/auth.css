@@ -1,9 +1,9 @@
-/* =========================================================
+/* =
    El Vanta — Auth Pages (Login + Multi-step Signup)
    ---------------------------------------------------------
    Depends on base.css for: CSS variables, font import,
    box-sizing reset, body base styles, reduced-motion global.
-   ========================================================= */
+   = */
 
 body {
     min-height: 100vh;
@@ -11,10 +11,15 @@ body {
     align-items: center;
     justify-content: center;
     padding: var(--space-4) var(--space-3);
+
     background:
         radial-gradient(circle at 120% 10%, rgba(217, 142, 74, 0.18), transparent 35%),
         radial-gradient(circle at -10% 90%, rgba(15, 92, 86, 0.12), transparent 40%),
         var(--color-bg);
+
+    background: url("https://res.cloudinary.com/u3zuv6xh/image/upload/v1784757241/background_xvulol.jpg") center / cover no-repeat;
+    background-color: #1C1F1D;
+
 }
 
 body::before {
