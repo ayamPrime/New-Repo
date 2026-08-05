@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get(
 # Set DEBUG=False via the environment variable in Vercel project settings.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app']
+ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '.replit.dev',
@@ -119,13 +119,9 @@ WSGI_APPLICATION = 'hub.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
     )
-
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
-
 }
 
 # Password validation
