@@ -1,46 +1,376 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Find Your New Home{% endblock %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/listings.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 
-{% block title %}Home{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-content">
-        <h1>Find your new home</h1>
-        <p>Verified rooms and apartments</p>
-        <a href="{% url 'listings' %}" class="btn-browse">Browse Listings</a>
+<div class="vc-pre" id="vcPre">
+  <div class="vc-pre__aura" aria-hidden="true"></div>
+  <div class="vc-pre__inner">
+    <div class="vc-pre__logo">
+      <div class="vc-pre__logo-ring" aria-hidden="true"></div>
+      <img src="{% static 'images/logo.jpg' %}" alt="VaseCrib" class="vc-pre__logo-img">
     </div>
+    <p class="vc-pre__tagline">Verified student living</p>
+    <div class="vc-pre__track"><div class="vc-pre__fill" id="vcPreFill"></div></div>
+  </div>
+</div>
+
+<section class="vc-hero" id="hero">
+  <div class="vc-hero__bg">
+    <video class="vc-hero__video" autoplay muted loop playsinline>
+      <source src="{% static 'videos/building-video.mp4' %}" type="video/mp4">
+    </video>
+    <img src="{% static 'images/hero.jpg' %}" alt="VaseCrib" class="vc-hero__fallback">
+    <div class="vc-hero__overlay"></div>
+    <svg class="vc-hero__topo" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="none" stroke="rgba(143,168,155,0.13)" stroke-width="1">
+        <ellipse cx="720" cy="450" rx="680" ry="340"/>
+        <ellipse cx="720" cy="450" rx="580" ry="280"/>
+        <ellipse cx="720" cy="450" rx="480" ry="225"/>
+        <ellipse cx="720" cy="450" rx="380" ry="170"/>
+        <ellipse cx="720" cy="450" rx="280" ry="118"/>
+        <ellipse cx="720" cy="450" rx="180" ry="70"/>
+        <ellipse cx="720" cy="450" rx="90" ry="36"/>
+        <ellipse cx="200" cy="150" rx="320" ry="160"/>
+        <ellipse cx="200" cy="150" rx="220" ry="108"/>
+        <ellipse cx="200" cy="150" rx="120" ry="62"/>
+        <ellipse cx="1280" cy="780" rx="280" ry="140"/>
+        <ellipse cx="1280" cy="780" rx="180" ry="90"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="vc-hero__inner">
+    <div class="vc-hero__content">
+      <p class="vc-hero__eyebrow" id="vcEye">
+        <span class="vc-eye-dash"></span>
+        Ago-Iwoye &middot; OOU Campus Area
+      </p>
+      <h1 class="vc-hero__title">
+        <span class="vc-mask"><span class="vc-word" id="vcW1">Find</span></span>
+        <span class="vc-mask"><span class="vc-word" id="vcW2">Your</span></span>
+        <span class="vc-mask"><span class="vc-word vc-word--accent" id="vcW3">New Home.</span></span>
+      </h1>
+      <p class="vc-hero__sub" id="vcSub">Every listing on VaseCrib has been physically inspected by our team. We walk the property so you know exactly what you are renting.</p>
+      <div class="vc-search" id="vcSearch">
+        <form class="vc-search__form" action="{% url 'listings' %}" method="GET">
+          <div class="vc-search__wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="q" placeholder="Browse listings..." class="vc-search__input">
+          </div>
+          <button type="submit" class="vc-search__btn">Search</button>
+        </form>
+        <div class="vc-search__pills">
+          <a href="{% url 'listings' %}?q=ago" class="vc-pill">Ago-Iwoye</a>
+          <a href="{% url 'listings' %}?q=oru" class="vc-pill">Oru</a>
+          <a href="{% url 'listings' %}" class="vc-pill">All Areas</a>
+        </div>
+      </div>
+    </div>
+    <div class="vc-hero__right">
+      <div class="vc-hero__card">
+        <div class="vc-hero__card-row">
+          <span class="vc-hero__card-num">100%</span>
+          <span class="vc-hero__card-label">Listings verified<br>before going live</span>
+        </div>
+        <div class="vc-hero__card-div"></div>
+        <div class="vc-hero__card-row">
+          <span class="vc-hero__card-num">0</span>
+          <span class="vc-hero__card-label">Hidden fees in<br>any transaction</span>
+        </div>
+        <div class="vc-hero__card-div"></div>
+        <div class="vc-hero__card-row">
+          <span class="vc-hero__card-num">3</span>
+          <span class="vc-hero__card-label">Steps to your<br>next home</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vc-hero__scroll">
+    <div class="vc-hero__scroll-inner">
+      <div class="vc-hero__scroll-dot"></div>
+    </div>
+    <span>Scroll</span>
+  </div>
 </section>
 
-<section class="recent-listings">
-    <h2>Recent Listings</h2>
-   <div class="listings-grid">
-        {% for listing in listings %}
-        <article class="listing-card">
-            <div class="listing-image">
-                {% if listing.images.first %}
-                    <img
-                        src="{{ listing.images.first.image.url }}"
-                        alt="{{ listing.listing_title }}"
-                        style="width:100%; height:100%; object-fit:cover; display:block;"
-                    >
-                {% endif %}
-                <span class="listing-price">₦{{ listing.rent_price }}/yr</span>
-            </div>
-            <div class="listing-body">
-                <h3 class="listing-title">{{ listing.listing_title }}</h3>
-                <p class="listing-location">{{ listing.location.distance_desc }}</p>
-                <span class="listing-type">{{ listing.get_property_type_display }}</span>
-                <a href="{% url 'listing_detail' listing.pk %}" class="listing-link">View Details</a>
-            </div>
-        </article>
-        {% empty %}
-        <p style="color: var(--color-ink-soft);">No listings yet. Check back soon.</p>
-        {% endfor %}
+<section class="vc-trust-bar">
+  <div class="vc-container">
+    <div class="vc-trust-bar__grid">
+      <div class="vc-trust-bar__item" data-reveal>
+        <i class="fa-solid fa-eye"></i>
+        <span>Physically inspected before listing</span>
+      </div>
+      <div class="vc-trust-bar__sep"></div>
+      <div class="vc-trust-bar__item" data-reveal data-delay="100">
+        <i class="fa-solid fa-receipt"></i>
+        <span>Every fee shown as a separate line item</span>
+      </div>
+      <div class="vc-trust-bar__sep"></div>
+      <div class="vc-trust-bar__item" data-reveal data-delay="200">
+        <i class="fa-solid fa-star"></i>
+        <span>Agents rated by students after every move</span>
+      </div>
+      <div class="vc-trust-bar__sep"></div>
+      <div class="vc-trust-bar__item" data-reveal data-delay="300">
+        <i class="fa-solid fa-rotate-left"></i>
+        <span>Dispute protection on every transaction</span>
+      </div>
     </div>
+  </div>
 </section>
+
+<section class="vc-how" id="how">
+  <div class="vc-container">
+    <div class="vc-section-head" data-reveal>
+      <span class="vc-label">How it works</span>
+      <h2 class="vc-section-head__title">Three steps.<br>No guesswork.</h2>
+    </div>
+    <div class="vc-how__grid">
+      <div class="vc-how__step" data-reveal>
+        <div class="vc-how__step-top">
+          <span class="vc-how__n">01</span>
+          <div class="vc-how__icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+        </div>
+        <h3 class="vc-how__title">Search</h3>
+        <p class="vc-how__text">Browse properties near your campus. Filter by price, room type, and area. Every result has already passed our inspection, nothing unverified appears here.</p>
+      </div>
+      <div class="vc-how__step" data-reveal data-delay="120">
+        <div class="vc-how__step-top">
+          <span class="vc-how__n">02</span>
+          <div class="vc-how__icon"><i class="fa-solid fa-clipboard-check"></i></div>
+        </div>
+        <h3 class="vc-how__title">Read the report</h3>
+        <p class="vc-how__text">Each listing includes a full inspection record and photos our team took on-site, structural notes, and a dated verification stamp. No surprises when you arrive.</p>
+      </div>
+      <div class="vc-how__step" data-reveal data-delay="240">
+        <div class="vc-how__step-top">
+          <span class="vc-how__n">03</span>
+          <div class="vc-how__icon"><i class="fa-solid fa-key"></i></div>
+        </div>
+        <h3 class="vc-how__title">Move in</h3>
+        <p class="vc-how__text">Rent, inspection fee, and processing charge shown as separate figures before you pay anything. If the property does not match what we documented, we refund both fees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vc-listings-section" id="listings">
+  <div class="vc-container">
+    <div class="vc-listings-section__head" data-reveal>
+      <div>
+        <span class="vc-label">Properties</span>
+        <h2 class="vc-section-head__title">Available now</h2>
+      </div>
+      <a href="{% url 'listings' %}" class="vc-btn vc-btn--outline">View all listings</a>
+    </div>
+
+    <div class="vc-listings-section__grid">
+      {% if listings %}
+        {% for listing in listings %}
+        <a href="{% url 'listing_detail' listing.pk %}" class="vc-card" data-reveal data-delay="{{ forloop.counter0 }}00">
+          <div class="vc-card__img-wrap">
+            {% with listing.listingimage_set.first as img %}
+              {% if img %}
+                <img src="{{ img.image.url }}" alt="{{ listing.title }}" class="vc-card__img">
+              {% else %}
+                <div class="vc-card__no-img"><i class="fa-solid fa-building"></i></div>
+              {% endif %}
+            {% endwith %}
+            <div class="vc-card__badges">
+              <span class="vc-card__badge vc-card__badge--verified">
+                <i class="fa-solid fa-circle-check"></i> Inspected
+              </span>
+            </div>
+          </div>
+          <div class="vc-card__body">
+            <p class="vc-card__type">{{ listing.get_property_type_display }}</p>
+            <h3 class="vc-card__title">{{ listing.title }}</h3>
+            <p class="vc-card__loc">
+              <i class="fa-solid fa-location-dot"></i>
+              {% if listing.location %}{{ listing.location.city }}{% else %}Ago-Iwoye{% endif %}
+            </p>
+            <div class="vc-card__foot">
+              <span class="vc-card__price">&#8358;{{ listing.price|floatformat:0 }}<span>/yr</span></span>
+              <span class="vc-card__arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      {% else %}
+        <div class="vc-listings-section__skeleton-wrap">
+          {% for i in "123" %}
+          <div class="vc-skel-card">
+            <div class="vc-skel vc-skel--img"></div>
+            <div class="vc-skel-card__body">
+              <div class="vc-skel vc-skel--line vc-skel--s"></div>
+              <div class="vc-skel vc-skel--line vc-skel--m"></div>
+              <div class="vc-skel vc-skel--line vc-skel--f"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="vc-empty" data-reveal>
+          <div class="vc-empty__icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <h3 class="vc-empty__title">Listings coming soon</h3>
+          <p class="vc-empty__text">We are currently inspecting properties around OOU Ago-Iwoye. Every listing will be verified before it appears here. Check back before the next resumption.</p>
+          <a href="{% url 'listings' %}" class="vc-btn vc-btn--primary">Go to listings page</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="vc-field" id="about">
+  <div class="vc-field__bg">
+    <img src="{% static 'images/building.jpg' %}" alt="" class="vc-field__img" onerror="this.style.display='none'">
+    <div class="vc-field__overlay"></div>
+    <svg class="vc-field__topo" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g fill="none" stroke="rgba(143,168,155,0.1)" stroke-width="1">
+        <ellipse cx="400" cy="300" rx="380" ry="250"/>
+        <ellipse cx="400" cy="300" rx="300" ry="195"/>
+        <ellipse cx="400" cy="300" rx="220" ry="142"/>
+        <ellipse cx="400" cy="300" rx="140" ry="90"/>
+        <ellipse cx="400" cy="300" rx="70" ry="46"/>
+      </g>
+    </svg>
+  </div>
+  <div class="vc-container vc-field__inner">
+    <div class="vc-field__text" data-reveal>
+      <span class="vc-label vc-label--light">Ground truth</span>
+      <h2 class="vc-field__title">We visit before<br>you do.</h2>
+      <p class="vc-field__sub">Nigerian student housing has no shortage of listings. What it lacks is verification. Before any property appears on VaseCrib, someone from our team stands in it, photographs it, and records what they found. That record stays attached to the listing permanently.</p>
+      <div class="vc-field__points">
+        <div class="vc-field__point">
+          <div class="vc-field__point-dot"></div>
+          <p>Boundary confirmed against title documents</p>
+        </div>
+        <div class="vc-field__point">
+          <div class="vc-field__point-dot"></div>
+          <p>Structural condition assessed and reported</p>
+        </div>
+        <div class="vc-field__point">
+          <div class="vc-field__point-dot"></div>
+          <p>Agent identity and listing details verified</p>
+        </div>
+        <div class="vc-field__point">
+          <div class="vc-field__point-dot"></div>
+          <p>Full photo record taken on-site by our team</p>
+        </div>
+      </div>
+      <a href="{% url 'listings' %}" class="vc-btn vc-btn--primary">See verified listings</a>
+    </div>
+    <div class="vc-field__canvas-wrap" data-reveal data-delay="200">
+      <canvas id="blueprintCanvas" class="vc-field__canvas"></canvas>
+      <p class="vc-field__canvas-label">Floor Plan — Inspection Record</p>
+    </div>
+  </div>
+</section>
+
+<section class="vc-areas" id="areas">
+  <div class="vc-container">
+    <div class="vc-section-head" data-reveal>
+      <span class="vc-label">Campus areas</span>
+      <h2 class="vc-section-head__title">Where are you<br>looking?</h2>
+    </div>
+    <div class="vc-areas__grid">
+      <a href="{% url 'listings' %}?q=ago" class="vc-area" data-reveal>
+        <div class="vc-area__topo" aria-hidden="true">
+          <svg viewBox="0 0 280 180">
+            <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.35">
+              <ellipse cx="140" cy="90" rx="130" ry="72"/>
+              <ellipse cx="140" cy="90" rx="100" ry="54"/>
+              <ellipse cx="140" cy="90" rx="70" ry="37"/>
+              <ellipse cx="140" cy="90" rx="40" ry="21"/>
+              <ellipse cx="140" cy="90" rx="16" ry="9"/>
+            </g>
+            <circle cx="140" cy="90" r="4" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="vc-area__body">
+          <span class="vc-area__n">01</span>
+          <h3 class="vc-area__title">Ago-Iwoye</h3>
+          <p class="vc-area__sub">OOU Main Campus</p>
+          <span class="vc-area__link">Search listings <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="{% url 'listings' %}?q=oru" class="vc-area" data-reveal data-delay="120">
+        <div class="vc-area__topo" aria-hidden="true">
+          <svg viewBox="0 0 280 180">
+            <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.35">
+              <ellipse cx="140" cy="90" rx="130" ry="72"/>
+              <ellipse cx="140" cy="90" rx="100" ry="54"/>
+              <ellipse cx="140" cy="90" rx="70" ry="37"/>
+              <ellipse cx="140" cy="90" rx="40" ry="21"/>
+              <ellipse cx="140" cy="90" rx="16" ry="9"/>
+            </g>
+            <circle cx="140" cy="90" r="4" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="vc-area__body">
+          <span class="vc-area__n">02</span>
+          <h3 class="vc-area__title">Oru</h3>
+          <p class="vc-area__sub">OOU Faculty Area</p>
+          <span class="vc-area__link">Search listings <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+      <a href="{% url 'listings' %}" class="vc-area vc-area--all" data-reveal data-delay="240">
+        <div class="vc-area__topo" aria-hidden="true">
+          <svg viewBox="0 0 280 180">
+            <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.2">
+              <ellipse cx="70" cy="60" rx="60" ry="42"/>
+              <ellipse cx="70" cy="60" rx="38" ry="26"/>
+              <ellipse cx="200" cy="120" rx="70" ry="46"/>
+              <ellipse cx="200" cy="120" rx="44" ry="28"/>
+              <ellipse cx="160" cy="50" rx="48" ry="30"/>
+            </g>
+            <circle cx="70" cy="60" r="3" fill="currentColor"/>
+            <circle cx="200" cy="120" r="3" fill="currentColor"/>
+            <circle cx="160" cy="50" r="3" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="vc-area__body">
+          <span class="vc-area__n">All</span>
+          <h3 class="vc-area__title">All areas</h3>
+          <p class="vc-area__sub">Every verified listing</p>
+          <span class="vc-area__link">Browse all <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="vc-agent-cta" data-reveal>
+  <div class="vc-container">
+    <div class="vc-agent-cta__inner">
+      <div class="vc-agent-cta__text">
+        <span class="vc-label">For agents and landlords</span>
+        <h2 class="vc-agent-cta__title">Your property,<br>in front of<br>every OOU student.</h2>
+        <p class="vc-agent-cta__sub">Free to list. Students trust VaseCrib because every property has been inspected. That trust works for you, verified listings fill faster.</p>
+      </div>
+      <div class="vc-agent-cta__actions">
+        <a href="{% url 'create_listings' %}" class="vc-btn vc-btn--primary vc-btn--lg">List a property</a>
+        <a href="{% url 'listings' %}" class="vc-btn vc-btn--ghost">Browse as student</a>
+        <div class="vc-agent-cta__note">
+          <i class="fa-solid fa-circle-check"></i>
+          Free to list &bull; No hidden charges
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="{% static 'js/home.js' %}"></script>
 {% endblock %}

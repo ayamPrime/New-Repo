@@ -4,26 +4,41 @@ from phonenumber_field.formfields import PhoneNumberField
 from .models import CustomUser, UserProfile
 
 class PersonalInfoForm(forms.Form):
-    first_name = forms.CharField(max_length = 150)
-    last_name = forms.CharField(max_length = 150)
+    first_name = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={'placeholder': 'e.g. Adaeze'})
+    )
+    last_name = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={'placeholder': 'e.g. Okafor'})
+    )
     dob = forms.DateField(
         widget = forms.DateInput(attrs = {'type': 'date'}),
         required = False,
         label = 'Date of Birth'
     )
-    gender = forms.ChoiceField(choices = CustomUser.Gender.choices)
+    gender = forms.ChoiceField(
+        choices=CustomUser.Gender.choices,
+        widget=forms.Select(attrs={'placeholder': 'Select your gender'})
+    )
 
 
 class AccountInfoForm(forms.Form):
-    username = forms.CharField(max_length = 150)
-    account_type = forms.ChoiceField(choices = CustomUser.AccType.choices)
+    username = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(attrs={'placeholder': 'e.g. adaeze_o'})
+    )
+    account_type = forms.ChoiceField(
+        choices=CustomUser.AccType.choices,
+        widget=forms.RadioSelect
+    )
     password1 = forms.CharField(
         label = 'Password',
-        widget = forms.PasswordInput
+        widget = forms.PasswordInput(attrs={'placeholder': 'Create a secure password'})
     )
     password2 = forms.CharField(
         label = 'Confirm Password',
-        widget = forms.PasswordInput
+        widget = forms.PasswordInput(attrs={'placeholder': 'Re-enter your password'})
     )
 
     def clean_username(self):
@@ -50,8 +65,17 @@ class AccountInfoForm(forms.Form):
         return cleaned_data
 
 class ContactInfoForm(forms.Form):
-    email = forms.EmailField()
-    phone_number = PhoneNumberField(region = 'NG')
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={'placeholder': 'e.g. adaeze@example.com'})
+    )
+    phone_number = PhoneNumberField(
+        region='NG',
+        widget=forms.TextInput(attrs={'placeholder': '0XX XXXX XXXX'})
+    )
+
+    def clean_email(self):
+        email = self.cleaned_data['email'].strip().lower()
+        return email
 
 class ProfilePictureForm(forms.ModelForm):
     agree_to_terms = forms.BooleanField(
@@ -71,6 +95,11 @@ class ProfilePictureForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['profile_image']
+        widgets = {
+            'profile_image': forms.ClearableFileInput(
+                attrs={'accept': 'image/jpeg,image/png'}
+            )
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

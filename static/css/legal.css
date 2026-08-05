@@ -12,4 +12,15 @@
 .legal-content h2 {
   margin-top: 2.5rem;
   margin-bottom: 0.75rem;
+  color: var(--color-primary);
+  font-family: var(--font-display);
+}
+
+.legal-content {
+  animation: fade-up 0.5s var(--transition-slow) both;
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(16px); }
+  100% { opacity: 1; transform: translateY(0); }
 }

@@ -10,7 +10,7 @@
 {% block header %}{% endblock %}
 {% block content %}
 <div class="add-listing-page">
-    <header class="page-header">
+    <header class="page-header" data-reveal>
         <h1>Post a Listing</h1>
         <p>Fields marked <span style="color:#B5482F">*</span> are required.</p>
     </header>
@@ -19,7 +19,7 @@
         {% csrf_token %}
 
         <!-- Section 1: Basic Info -->
-        <div class="form-section">
+        <div class="form-section" data-reveal>
             <div class="section-label">
                 <span class="section-number">1</span>
                 <h2>Basic Information</h2>
@@ -67,7 +67,7 @@
         </div>
 
         <!-- Section 2: Location -->
-        <div class="form-section">
+        <div class="form-section" data-reveal>
             <div class="section-label">
                 <span class="section-number">2</span>
                 <h2>Location</h2>
@@ -97,7 +97,7 @@
         </div>
 
         <!-- Section 3: Amenities -->
-        <div class="form-section">
+        <div class="form-section" data-reveal>
             <div class="section-label">
                 <span class="section-number">3</span>
                 <h2>Amenities</h2>
@@ -140,7 +140,7 @@
         </div>
 
         <!-- Section 4: Media -->
-        <div class="form-section">
+        <div class="form-section" data-reveal>
             <div class="section-label">
                 <span class="section-number">4</span>
                 <h2>Photos & Video</h2>
@@ -151,7 +151,7 @@
                     <p class="field-label">Photos <span class="required">*</span></p>
                     <label class="upload-area" for="{{ images_form.images.id_for_label }}">
                         {{ images_form.images }}
-                        <i class="fas fa-images upload-icon"></i>
+                        <i class="fas fa-images upload-icon" data-icon-pop></i>
                         <p><strong>Click to upload photos</strong></p>
                         <p>or drag and drop here</p>
                     </label>
@@ -163,7 +163,7 @@
                     <p class="field-label">Video </p>
                     <label class="upload-area" for="{{ video_form.video.id_for_label }}">
                         {{ video_form.video }}
-                        <i class="fas fa-video upload-icon"></i>
+                        <i class="fas fa-video upload-icon" data-icon-pop></i>
                         <p><strong>Click to upload a video</strong></p>
                         <p>or drag and drop here</p>
                     </label>
@@ -175,7 +175,7 @@
         </div>
 
         <!-- Actions -->
-        <div class="form-actions">
+        <div class="form-actions" data-reveal>
             <button type="submit" class="btn-submit">Post Listing</button>
             <a href="{% url 'home' %}" class="btn-cancel">Cancel</a>
         </div>

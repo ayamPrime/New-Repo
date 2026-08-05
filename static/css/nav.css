@@ -1,5 +1,5 @@
-/* =========================================================
-   El Vanta — Navigation Drawer
+﻿/* =========================================================
+   El Vanta â€” Navigation Drawer
    ---------------------------------------------------------
    Hamburger button (top-left, fixed) toggles a blue drawer
    that slides in from the left. Logout sits pinned to the
@@ -10,7 +10,7 @@
    is included in base.html.
 
    NOTE: --radius-sm now lives in base.css. The .messages
-   flash-message styling moved to base.css — it's a global
+   flash-message styling moved to base.css â€” it's a global
    concern, not nav-specific.
    ========================================================= */
 
@@ -32,12 +32,16 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
-    background: var(--color-navy);
+    background: var(--color-primary);
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
     padding: 0;
+    transition: background var(--transition-fast), transform 0.1s ease;
 }
+
+.nav-toggle:hover { background: var(--color-primary-hover); }
+.nav-toggle:active { transform: scale(0.96); }
 
 .nav-toggle span {
     display: block;
@@ -67,11 +71,11 @@
     left: 0;
     height: 100vh;
     width: var(--nav-width);
-    background: var(--color-navy);
+    background: var(--color-primary);
     color: var(--nav-text);
     z-index: 1050;
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
     display: flex;
     flex-direction: column;
     padding: 80px 24px 24px;
@@ -101,7 +105,12 @@
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(2px);
+}
+
+.nav-links a {
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
 /* Pin logout to the bottom of the drawer */
@@ -147,3 +156,4 @@
         transition: none;
     }
 }
+

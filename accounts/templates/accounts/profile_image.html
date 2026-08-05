@@ -22,13 +22,14 @@
             <div class="step-line done"></div>
             <div class="step-dot active">4</div>
         </div>
+        <p class="step-progress" aria-label="Signup progress">Step 4 of 4</p>
 
         <header id="form_header">
             <h1>ACCOMMODATIONS HUB</h1>
             <h3>Profile Picture</h3>
         </header>
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST" enctype="multipart/form-data" novalidate data-signup-step="4">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
@@ -50,6 +51,14 @@
                     </label>
                     {{ form.profile_image.errors }}
                     <p class="upload-hint">JPG or PNG. Square photos work best.</p>
+                    <div class="image-crop-panel" data-crop-panel hidden>
+                        <p class="crop-title">Preview your photo</p>
+                        <div class="crop-preview-frame">
+                            <img data-crop-preview alt="Selected profile photo preview">
+                        </div>
+                        <p class="upload-hint">Your photo will be cropped to a square before it is saved.</p>
+                        <button type="button" class="crop-reset" data-crop-reset>Choose a different photo</button>
+                    </div>
                 </div>
             </div>
             
@@ -72,14 +81,14 @@
             {{ form.lister_onboarding_agreement.errors }}
 
             <div class="buttons">
-                <button type="submit">
+                <button type="submit" class="signup-submit">
                     {% if is_lister %}Complete Sign Up{% else %}Finish{% endif %}
                 </button>
             </div>
         </form>
 
         <div class="form_options single">
-            <p><a href="{% url 'signup_step3' %}">← Back to Step 3</a></p>
+            <p><a class="back-button" href="{% url 'signup_step3' %}"><i class="fas fa-chevron-left" aria-hidden="true"></i> Back to Step 3</a></p>
         </div>
 
     </div>

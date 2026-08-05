@@ -74,3 +74,4 @@ documents/
 *.jpg
 *.jpeg
 *.png
+deploy_territory.py

@@ -134,7 +134,7 @@ def signup_step4(request):
                 # If anything fails, the whole transaction rolls back.
                 # Neither user nor profile ends up in the database.
                 print(f"SIGNUP ERROR: {e}")
-                form.add_error(None, "Something went wrong. Please try again. {e}")
+                form.add_error(None, f"Something went wrong. Please try again. {e}")
                 return render(request, 'accounts/profile_image.html', {
                     'form':     form,
                     'is_lister': is_lister,
