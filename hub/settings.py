@@ -33,13 +33,7 @@ SECRET_KEY = os.environ.get(
 # Set DEBUG=False via the environment variable in Vercel project settings.
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    '.replit.dev',
-    '.repl.co',
-    '.vercel.app',
-]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.vercel.app', 'vasecrib.com.ng', 'www.vasecrib.com.ng']
 
 CSRF_TRUSTED_ORIGINS = [
     'https://*.replit.dev',

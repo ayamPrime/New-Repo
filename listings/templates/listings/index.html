@@ -72,7 +72,7 @@
         <div class="vc-search__pills">
           <a href="{% url 'listings' %}?q=ago" class="vc-pill">Ago-Iwoye</a>
           <a href="{% url 'listings' %}?q=oru" class="vc-pill">Oru</a>
-          <a href="{% url 'listings' %}" class="vc-pill">All Areas</a>
+          <a href="{% url 'listings' %}" class="vc-pill">Other Areas</a>
         </div>
       </div>
     </div>
@@ -145,7 +145,7 @@
         <h3 class="vc-how__title">Search</h3>
         <p class="vc-how__text">Browse properties near your campus. Filter by price, room type, and area. Every result has already passed our inspection, nothing unverified appears here.</p>
       </div>
-      <div class="vc-how__step" data-reveal data-delay="120">
+      <div class="vc-how__step vc-how__step--featured" data-reveal data-delay="120">
         <div class="vc-how__step-top">
           <span class="vc-how__n">02</span>
           <div class="vc-how__icon"><i class="fa-solid fa-clipboard-check"></i></div>
@@ -253,10 +253,6 @@
       <div class="vc-field__points">
         <div class="vc-field__point">
           <div class="vc-field__point-dot"></div>
-          <p>Boundary confirmed against title documents</p>
-        </div>
-        <div class="vc-field__point">
-          <div class="vc-field__point-dot"></div>
           <p>Structural condition assessed and reported</p>
         </div>
         <div class="vc-field__point">
@@ -273,79 +269,6 @@
     <div class="vc-field__canvas-wrap" data-reveal data-delay="200">
       <canvas id="blueprintCanvas" class="vc-field__canvas"></canvas>
       <p class="vc-field__canvas-label">Floor Plan — Inspection Record</p>
-    </div>
-  </div>
-</section>
-
-<section class="vc-areas" id="areas">
-  <div class="vc-container">
-    <div class="vc-section-head" data-reveal>
-      <span class="vc-label">Campus areas</span>
-      <h2 class="vc-section-head__title">Where are you<br>looking?</h2>
-    </div>
-    <div class="vc-areas__grid">
-      <a href="{% url 'listings' %}?q=ago" class="vc-area" data-reveal>
-        <div class="vc-area__topo" aria-hidden="true">
-          <svg viewBox="0 0 280 180">
-            <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.35">
-              <ellipse cx="140" cy="90" rx="130" ry="72"/>
-              <ellipse cx="140" cy="90" rx="100" ry="54"/>
-              <ellipse cx="140" cy="90" rx="70" ry="37"/>
-              <ellipse cx="140" cy="90" rx="40" ry="21"/>
-              <ellipse cx="140" cy="90" rx="16" ry="9"/>
-            </g>
-            <circle cx="140" cy="90" r="4" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="vc-area__body">
-          <span class="vc-area__n">01</span>
-          <h3 class="vc-area__title">Ago-Iwoye</h3>
-          <p class="vc-area__sub">OOU Main Campus</p>
-          <span class="vc-area__link">Search listings <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-      <a href="{% url 'listings' %}?q=oru" class="vc-area" data-reveal data-delay="120">
-        <div class="vc-area__topo" aria-hidden="true">
-          <svg viewBox="0 0 280 180">
-            <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.35">
-              <ellipse cx="140" cy="90" rx="130" ry="72"/>
-              <ellipse cx="140" cy="90" rx="100" ry="54"/>
-              <ellipse cx="140" cy="90" rx="70" ry="37"/>
-              <ellipse cx="140" cy="90" rx="40" ry="21"/>
-              <ellipse cx="140" cy="90" rx="16" ry="9"/>
-            </g>
-            <circle cx="140" cy="90" r="4" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="vc-area__body">
-          <span class="vc-area__n">02</span>
-          <h3 class="vc-area__title">Oru</h3>
-          <p class="vc-area__sub">OOU Faculty Area</p>
-          <span class="vc-area__link">Search listings <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
-      <a href="{% url 'listings' %}" class="vc-area vc-area--all" data-reveal data-delay="240">
-        <div class="vc-area__topo" aria-hidden="true">
-          <svg viewBox="0 0 280 180">
-            <g fill="none" stroke="currentColor" stroke-width="1" opacity="0.2">
-              <ellipse cx="70" cy="60" rx="60" ry="42"/>
-              <ellipse cx="70" cy="60" rx="38" ry="26"/>
-              <ellipse cx="200" cy="120" rx="70" ry="46"/>
-              <ellipse cx="200" cy="120" rx="44" ry="28"/>
-              <ellipse cx="160" cy="50" rx="48" ry="30"/>
-            </g>
-            <circle cx="70" cy="60" r="3" fill="currentColor"/>
-            <circle cx="200" cy="120" r="3" fill="currentColor"/>
-            <circle cx="160" cy="50" r="3" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="vc-area__body">
-          <span class="vc-area__n">All</span>
-          <h3 class="vc-area__title">All areas</h3>
-          <p class="vc-area__sub">Every verified listing</p>
-          <span class="vc-area__link">Browse all <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
-      </a>
     </div>
   </div>
 </section>
