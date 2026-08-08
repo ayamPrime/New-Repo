@@ -1103,3 +1103,65 @@ body {
   .vc-hero__inner { padding: 110px 20px 80px; }
   .vc-container { padding: 0 20px; }
 }
+
+
+/* Homepage refinements */
+.vc-hero__topo { opacity: 0.035; }
+
+.vc-how__step--featured {
+  position: relative;
+  background: #fffdf8;
+  box-shadow: inset 0 0 0 2px rgba(223, 131, 68, 0.45);
+}
+
+.vc-how__step--featured .vc-how__icon {
+  color: var(--teal);
+  border-color: var(--orange);
+  background: rgba(223, 131, 68, 0.08);
+}
+
+@media (min-width: 769px) {
+  .vc-hero { min-height: calc(100vh - var(--nav-height)); }
+  .vc-hero__inner { padding-top: 88px; padding-bottom: 72px; }
+}
+
+@media (max-width: 768px) {
+  .vc-hero { min-height: auto; }
+  .vc-hero__inner { padding: 84px 20px 56px; }
+  .vc-hero__eyebrow { margin-bottom: 16px; }
+  .vc-hero__title { margin-bottom: 14px; }
+  .vc-hero__sub { margin-bottom: 24px; font-size: 14px; line-height: 1.6; }
+  .vc-hero__scroll { display: none; }
+
+  .vc-pill {
+    padding: 8px 14px;
+    color: rgba(252, 250, 246, 0.9);
+    font-size: 13px;
+    background: rgba(143, 168, 155, 0.1);
+    border-color: rgba(143, 168, 155, 0.48);
+  }
+
+  .vc-trust-bar { padding: 18px 0; }
+
+  .vc-trust-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 10px;
+  }
+
+  .vc-trust-bar__item {
+    padding: 8px 2px;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+/* Cream loading-screen background */
+.vc-pre {
+  background: #F7F3EC;
+}
+
+.vc-pre__tagline {
+  color: rgba(17, 17, 17, 0.58);
+}

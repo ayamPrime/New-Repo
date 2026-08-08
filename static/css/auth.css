@@ -601,3 +601,21 @@ span.required { color: var(--color-danger); }
     .form-space { padding: var(--space-4) var(--space-3); }
     .form_options { grid-template-columns: 1fr; }
 }
+
+
+/* Cream auth background and safe spacing around navigation */
+body {
+    background: #F7F3EC;
+    background-image: none;
+    padding-bottom: calc(var(--space-4) + var(--mobile-nav-height) + env(safe-area-inset-bottom));
+}
+
+body::before {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: calc(var(--space-4) + var(--nav-height)) var(--space-3) var(--space-4);
+    }
+}

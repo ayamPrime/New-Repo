@@ -1,159 +1,150 @@
-﻿/* =========================================================
-   El Vanta â€” Navigation Drawer
-   ---------------------------------------------------------
-   Hamburger button (top-left, fixed) toggles a blue drawer
-   that slides in from the left. Logout sits pinned to the
-   bottom via flex + margin-top: auto.
-
-   Depends on base.css for: CSS variables, reduced-motion
-   global. Loaded on every page since the nav partial itself
-   is included in base.html.
-
-   NOTE: --radius-sm now lives in base.css. The .messages
-   flash-message styling moved to base.css â€” it's a global
-   concern, not nav-specific.
-   ========================================================= */
-
-:root {
-    --nav-text: #F5F6F7;
-    --nav-width: 260px;
+﻿:root {
+    --nav-height: 72px;
+    --mobile-nav-height: 76px;
 }
 
-/* Hamburger button */
-.nav-toggle {
+body {
+    padding-bottom: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom));
+}
+
+.site-nav {
     position: fixed;
-    top: 16px;
-    left: 16px;
-    z-index: 1100;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    background: var(--color-primary);
-    border: none;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    padding: 0;
-    transition: background var(--transition-fast), transform 0.1s ease;
-}
-
-.nav-toggle:hover { background: var(--color-primary-hover); }
-.nav-toggle:active { transform: scale(0.96); }
-
-.nav-toggle span {
-    display: block;
-    width: 20px;
-    height: 2px;
-    background: var(--nav-text);
-    border-radius: 1px;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(2) {
-    opacity: 0;
-}
-
-.nav-toggle[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-}
-
-/* The drawer itself */
-.nav-drawer {
-    position: fixed;
-    top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
-    height: 100vh;
-    width: var(--nav-width);
-    background: var(--color-primary);
-    color: var(--nav-text);
-    z-index: 1050;
-    transform: translateX(-100%);
-    transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
-    display: flex;
-    flex-direction: column;
-    padding: 80px 24px 24px;
+    z-index: 1100;
+    padding-bottom: env(safe-area-inset-bottom);
+    background: rgba(247, 243, 236, 0.97);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -8px 24px rgba(15, 92, 86, 0.08);
 }
 
-.nav-drawer.open {
-    transform: translateX(0);
+.site-nav-inner {
+    min-height: var(--mobile-nav-height);
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 6px 10px;
+}
+
+.nav-brand {
+    display: none;
 }
 
 .nav-links {
-    list-style: none;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    align-items: stretch;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    list-style: none;
 }
 
-.nav-links a {
-    display: block;
-    padding: 10px 12px;
-    color: var(--nav-text);
-    text-decoration: none;
-    border-radius: var(--radius-sm);
-    font-size: 1rem;
-}
-
-.nav-links a:hover,
-.nav-links a:focus-visible {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateX(2px);
-}
-
-.nav-links a {
-    transition: background var(--transition-fast), transform var(--transition-fast);
-}
-
-/* Pin logout to the bottom of the drawer */
-.nav-logout {
-    margin-top: auto;
-}
-
+.nav-link,
 .nav-logout button {
+    display: flex;
+    min-height: 62px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 4px;
+    border: 0;
     border-radius: var(--radius-sm);
     background: transparent;
-    color: var(--nav-text);
-    font-size: 1rem;
+    color: var(--color-ink-soft);
+    font: inherit;
+    font-size: 0.67rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-decoration: none;
     cursor: pointer;
 }
 
-.nav-logout button:hover {
-    background: rgba(255, 255, 255, 0.1);
+.nav-link i,
+.nav-logout i {
+    font-size: 1.05rem;
 }
 
-/* Dark overlay behind the drawer */
-.nav-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1040;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+.nav-link:hover,
+.nav-link:focus-visible,
+.nav-logout button:hover,
+.nav-logout button:focus-visible {
+    background: var(--color-accent-soft);
+    color: var(--color-primary);
+    outline: none;
 }
 
-.nav-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
+.nav-logout {
+    height: 100%;
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .nav-toggle span,
-    .nav-drawer,
-    .nav-overlay {
-        transition: none;
+.nav-logout button {
+    border: 0;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-top: var(--nav-height);
+        padding-bottom: 0;
+    }
+
+    .site-nav {
+        top: 0;
+        bottom: auto;
+        padding: 0;
+        border-top: 0;
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 4px 18px rgba(15, 92, 86, 0.06);
+    }
+
+    .site-nav-inner {
+        display: flex;
+        min-height: var(--nav-height);
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+    }
+
+    .nav-brand {
+        display: inline-block;
+        color: var(--color-primary);
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .nav-link,
+    .nav-logout button {
+        min-height: 42px;
+        flex-direction: row;
+        gap: 8px;
+        width: auto;
+        padding: 10px 12px;
+        font-size: 0.86rem;
+    }
+
+    .nav-link i,
+    .nav-logout i {
+        font-size: 0.95rem;
+    }
+
+    .nav-logout button {
+        border: 1px solid var(--color-border);
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .nav-link,
+    .nav-logout button {
+        transition: none;
+    }
+}
